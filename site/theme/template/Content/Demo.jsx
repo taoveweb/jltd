@@ -36,6 +36,7 @@ export default class Demo extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps,'nextProps')
     const { highlightedCode } = nextProps;
     const div = document.createElement('div');
     div.innerHTML = highlightedCode[1].highlighted;
@@ -43,6 +44,7 @@ export default class Demo extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+   
     const { codeExpand, copied, copyTooltipVisible } = this.state;
     const { expand } = this.props;
     return (codeExpand || expand) !== (nextState.codeExpand || nextProps.expand)
@@ -199,20 +201,20 @@ ${state.sourceCode.replace('mountNode', 'document.getElementById(\'container\')'
             <a href={`#${meta.id}`} ref={this.saveAnchor}>
               {localizedTitle}
             </a>
-            <EditButton title={<FormattedMessage id="app.content.edit-page" />} filename={meta.filename} />
-          </div>
+{/*             <EditButton title={<FormattedMessage id="app.content.edit-page" />} filename={meta.filename} />
+ */}          </div>
           {introChildren}
           <Tooltip title={codeExpand ? 'Hide Code' : 'Show Code'}>
             <span className="code-expand-icon">
               <img
                 alt="expand code"
-                src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg"
+                src="http://static.oldku.com/wSAkBuJFbdxsosKKpqyq.svg"
                 className={codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'}
                 onClick={this.handleCodeExpand}
               />
               <img
                 alt="expand code"
-                src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg"
+                src="http://static.oldku.com/OpROPHYqWmrMDBFMZtKF.svg"
                 className={codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'}
                 onClick={this.handleCodeExpand}
               />

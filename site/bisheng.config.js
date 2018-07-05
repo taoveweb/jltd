@@ -101,7 +101,7 @@ module.exports = {
 
     if (usePreact) {
       config.resolve.alias = Object.assign({}, config.resolve.alias, {
-        react: 'preact-compat',
+        react: 'react',
         'react-dom': 'preact-compat',
         'create-react-class': 'preact-compat/lib/create-react-class',
         'react-router': 'react-router',
