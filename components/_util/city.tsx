@@ -4024,7 +4024,7 @@ let DICT: any = {
 
 
 const tree = (list: any) => {
-  let mapped: any;
+  let mapped: any={};
   let item: { id: number; pid: number; parentId: number };
   for (let i = 0; i < list.length; i += 1) {
     item = list[i];
@@ -4069,5 +4069,4 @@ let DICT_FIXED = (function() {
   }
   return tree(fixed);
 })();
-module.exports = DICT_FIXED;
 export default DICT_FIXED;

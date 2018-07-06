@@ -114,6 +114,7 @@ class TableComponents extends React.Component<
         align: 'center',
         render: (text: any, record: any, index: any) => {
           const { editable } = record;
+          console.log(text);
           return (
             <div className="editable-row-operations">
               {editable ? (
@@ -335,12 +336,7 @@ class TableComponents extends React.Component<
   };
   render() {
     const { tableDataSource } = this.state;
-    const {
-      selectedRowKeys,
-      tableWidth = 1300,
-      rowKey,
-      loading = false,
-    } = this.props;
+    const { selectedRowKeys, rowKey, loading = false } = this.props;
     const rowSelection: object = {
       fixed: 'left',
       selectedRowKeys,

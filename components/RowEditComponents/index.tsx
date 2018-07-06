@@ -372,7 +372,7 @@ class RowEditComponents extends React.Component<
           showTime
           onChange={(data, dateStrings) => {
             if (this.props.onChange) {
-              this.props.onChange(dateStrings);
+              this.props.onChange(dateStrings, data);
             }
           }}
           value={this.props.value ? this.props.value : null}
