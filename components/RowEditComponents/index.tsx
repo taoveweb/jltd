@@ -14,7 +14,7 @@ import classnames from 'classnames';
 import * as moment from 'moment';
 const styles = require('./style/index.less');
 import RanderRange from '../LabelWithController/RanderRange';
-import DataDictionaryComponents from '../DataDictionaryComponents/DataDictionaryComponents';
+import DataDictionaryComponents from '../DataDictionaryComponents';
 import Enum from '../_util/enum';
 import city from '../_util/city';
 const { RangePicker } = DatePicker;

@@ -1,6 +1,6 @@
 ---
 category: Components
-subtitle: 单格
+subtitle: 编缉表格表单
 type: Data Display
 cols: 1
 title: EditTableForm

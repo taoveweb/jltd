@@ -1,7 +1,7 @@
 import * as React from 'react';
 import update from 'immutability-helper';
 import { DatePicker, Table, Input, Popconfirm, Icon } from 'antd';
-import * as moment from 'moment';
+const moment = require('moment');
 const styles = require('./style/index.less');
 
 const EditableCell = (arr: {
@@ -19,7 +19,7 @@ const EditableCell = (arr: {
             onChange={(moments, dateStrings) => {
               arr.onChange(dateStrings, moments);
             }}
-            value={arr.value || moment(arr.value)}
+            value={arr.value && moment(arr.value)}
           />
         ) : (
           <Input
@@ -45,16 +45,16 @@ interface TableComponents {
   isSave: any;
   isCancel: any;
   tableData: any;
-  onDelete: any;
-  onSelect: any;
-  onEdit: any;
-  onAdd: any;
-  selectedRowKeys: any;
+  selectedRowKeys: string;
   tableWidth: number;
   rowKey: any;
   loading: boolean;
   onChange: any;
   pagination: object | false;
+  onDelete: any;
+  onSelect: any;
+  onEdit: any;
+  onAdd: any;
 }
 class TableComponents extends React.Component<
   TableComponents,
@@ -169,59 +169,7 @@ class TableComponents extends React.Component<
         {
           tableDataSource,
         },
-        () => {
-          // let haveOperation;
-          // this.columns.some(column => {
-          //   if (column.dataIndex === 'operation') {
-          //     haveOperation = true;
-          //   }
-          //   return haveOperation;
-          // });
-          // if (
-          //   (this.props.isAddable ||
-          //     this.props.isDeleteable ||
-          //     this.props.isEditable) &&
-          //   !haveOperation
-          // ) {
-          //   this.columns.push({
-          //     title: '操作',
-          //     dataIndex: 'operation',
-          //     render: (text, record, index) => {
-          //       const isLast = tableDataSource.length - 1 === index;
-          //       const { editable } = record;
-          //       const { isAddable, isEditable, isDeleteable } = this.props;
-          //       return (
-          //         <div className="editable-row-operations">
-          //           {isLast ? (
-          //             isAddable && (
-          //               <a onClick={() => this.add(record.key)}>添加</a>
-          //             )
-          //           ) : editable ? (
-          //             <span>
-          //               <a onClick={() => this.save(record.key)}>保存</a>
-          //               <Popconfirm
-          //                 title="Sure to cancel?"
-          //                 onConfirm={() => this.cancel(record.key)}
-          //               >
-          //                 <a>取消</a>
-          //               </Popconfirm>
-          //             </span>
-          //           ) : (
-          //             <span>
-          //               {isEditable && (
-          //                 <a onClick={() => this.edit(record.key)}>编辑</a>
-          //               )}
-          //               {isDeleteable && (
-          //                 <a onClick={() => this.delete(record.key)}>删除</a>
-          //               )}
-          //             </span>
-          //           )}
-          //         </div>
-          //       );
-          //     },
-          //   });
-          // }
-        }
+        () => {}
       );
     }
   }
@@ -334,6 +282,7 @@ class TableComponents extends React.Component<
       />
     );
   };
+
   render() {
     const { tableDataSource } = this.state;
     const { selectedRowKeys, rowKey, loading = false } = this.props;

@@ -1,6 +1,6 @@
 ---
 category: Components
-subtitle: 分页
+subtitle: 分页组件
 type: Navigation
 cols: 1
 title: PaginationComponent

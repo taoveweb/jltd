@@ -1,6 +1,6 @@
 ---
 category: Components
-subtitle: 单格
+subtitle: 标准表格
 type: Data Display
 cols: 1
 title: StandardTable

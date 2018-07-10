@@ -1,6 +1,6 @@
 ---
 category: Components
-subtitle: 单格
+subtitle: 表格组件
 type: Data Display
 cols: 1
 title: TableComponents
@@ -17,12 +17,19 @@ toc: false
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| current | 当前页数 | number | - |
+| tableColumns | 表格列的配置描述，具体项见下表 | [ColumnProps](https://git.io/vMMXC)\[] | - |
+| tableData | 数据数组 | any\[] |  |
+| isEditable | 是否可编缉 | boolean | - |
+| isDeleteable | 是否可删除 | boolean | - |
+| isAddable | 是否可添加 | boolean | - |
+| isSave | 是否可保存 | boolean | - |
+| isCancel | 是否可取消 | boolean | - |
 | total | 数据总数 | number | 0 |
-| pageSize | 每页条数 | number | - |
+| selectedRowKeys | 选种行key | string | - |
+| rowKey | 行key | string | - |
+| tableWidth | 表格宽度 | number | - |
+| loading | 加载中 | boolean | false |
+| pagination | 分页器，参考[配置项](#pagination)或 [pagination](/components/pagination/)，设为 false 时不展示和进行分页 | object |  |
 | onChange | 页码改变的回调，参数是改变后的页码及每页条数 | Function(page, pageSize) | noop |
-| onShowSizeChange | pageSize 变化的回调 | Function(current, size) | noop |
-| pageSizeOptions | 指定每页可以显示多少条 | string\[] | ['10', '20', '30', '40'] |
-| showTotal | 用于显示数据总量和当前数据顺序 | Function(total, range) | - |
 
 

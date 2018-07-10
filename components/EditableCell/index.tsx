@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import * as moment from 'moment';
 const styles = require('./style/index.less');
 
-// import DataDictionaryComponents from '../../DataDictionaryComponents/DataDictionaryComponents';
+// import DataDictionaryComponents from '../../DataDictionaryComponents';
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const Search = Input.Search;
@@ -13,7 +13,6 @@ const RadioGroup = Radio.Group;
 // 获取FormItem
 const FormItem = Form.Item;
 export interface EditableCellProps {
-  handleSubmit: Function; // 提交方法
   getEditRowFormRef?: any;
   rows?: any;
   placeholder?: any;
@@ -39,21 +38,6 @@ export interface EditableCellProps {
   field?: string;
   fieldOption?: any;
   form?: any;
-  datas?: Array<{
-    isRequire?: boolean; // 是否显示必填星号提示
-    type: string; // 类型
-    onChange: Function; // 状态变化方法
-    value?: string; // 外部修改输入框的值
-    codeType?: string; // 数据字典选择框的类型
-    defaultValue?: string; // 默认值
-    className?: string; // 样式修改
-    dropdownMatchSelectWidth?: boolean;
-    mode?: string;
-    style?: Object;
-    placeholder?: string; // 提示文字
-    optionData?: Array<{ value: string; text: string }>; // 下拉框内容
-    radioData?: Array<{ value: string; text: string }>; // 单选框内容
-  }>;
 }
 
 class EditableCell extends React.Component<EditableCellProps> {
@@ -295,23 +279,6 @@ class EditableCell extends React.Component<EditableCellProps> {
             </RadioGroup>
           </div>
         );
-      /* case 'dataDictionary':
-                return (
-                    <DataDictionaryComponents
-                        codeType={this.props.codeType}
-                        disabled={this.props.disabled === true || this.props.disabled === 'true'}
-                        value={this.props.value}
-                        defaultValue={this.props.defaultValue}
-                        className={this.props.className || styles['view-style']}
-                        style={this.props.style || { width: 170 }}
-                        onChange={this.props.onChange}
-                        dropdownMatchSelectWidth={
-                            this.props.dropdownMatchSelectWidth === undefined
-                                ? true : this.props.dropdownMatchSelectWidth
-                        }
-                        mode={this.props.mode ? this.props.mode : ''}
-                    />
-                ); */
       default:
         break;
     }

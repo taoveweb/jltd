@@ -21,3 +21,4 @@ export { default as EditTableForm } from './EditTableForm';
 export { default as TableComponents } from './TableComponents';
 export { default as StandardTable } from './StandardTable';
 export { default as RowEditComponents } from './RowEditComponents';
+export { default as Button } from './button';

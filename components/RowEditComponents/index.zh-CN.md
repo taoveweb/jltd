@@ -1,6 +1,6 @@
 ---
 category: Components
-subtitle: 单格
+subtitle: 行编缉组件
 type: Data Display
 cols: 1
 title: RowEditComponents
