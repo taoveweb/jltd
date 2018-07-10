@@ -1,6 +1,6 @@
 {
   "name": "jltd",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "title": "jltd Design",
   "description": "An enterprise-class UI design language and React-based implementation",
   "homepage": "http://ant.design/",
@@ -201,8 +201,7 @@
     "lint-staged": "lint-staged",
     "lint-staged:ts": "tsc && node node_modules/tslint/bin/tslint",
     "lint-staged:es": "eslint ./.eslintrc.js ./webpack.config.js",
-    "lint-staged:demo": "cross-env RUN_ENV=DEMO eslint --ext '.md'",
-    "publish": "npm run dist && npm run compile && npm publish"
+    "lint-staged:demo": "cross-env RUN_ENV=DEMO eslint --ext '.md'"
   },
   "lint-staged": {
     "components/**/*.tsx": [
