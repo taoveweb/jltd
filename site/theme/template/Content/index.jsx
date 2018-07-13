@@ -3,10 +3,13 @@ import MainContent from './MainContent';
 import * as utils from '../utils';
 
 function isChangelog(pathname) {
-  return pathname.indexOf('changelog') >= 0;
+  return (
+    pathname.indexOf('changelog') >= 0 || pathname.indexOf('CHANGELOG') >= 0
+  );
 }
 
 export default collect(async (nextProps) => {
+  console.log(nextProps, 'nextProps.data');
   const { pathname } = nextProps.location;
   const pageDataPath = pathname.replace('-cn', '').split('/');
   const pageData = isChangelog(pathname)
@@ -18,10 +21,17 @@ export default collect(async (nextProps) => {
 
   const locale = utils.isZhCN(pathname) ? 'zh-CN' : 'en-US';
   const pageDataPromise = typeof pageData === 'function'
-    ? pageData() : (pageData[locale] || pageData.index[locale] || pageData.index)();
-  const demosFetcher = nextProps.utils.get(nextProps.data, [...pageDataPath, 'demo']);
+    ? pageData()
+    : (pageData[locale] || pageData.index[locale] || pageData.index)();
+  const demosFetcher = nextProps.utils.get(nextProps.data, [
+    ...pageDataPath,
+    'demo',
+  ]);
   if (demosFetcher) {
-    const [localizedPageData, demos] = await Promise.all([pageDataPromise, demosFetcher()]);
+    const [localizedPageData, demos] = await Promise.all([
+      pageDataPromise,
+      demosFetcher(),
+    ]);
     return { localizedPageData, demos };
   }
   return { localizedPageData: await pageDataPromise };

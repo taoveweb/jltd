@@ -34,12 +34,15 @@ export function getMenuItems(moduleData, locale, categoryOrder, typeOrder) {
       }
     }
   });
-  return menuItems.map((i) => {
-    if (i.children) {
-      i.children = i.children.sort(sortFn);
-    }
-    return i;
-  }).sort(sortFn);
+
+  return menuItems
+    .map((i) => {
+      if (i.children) {
+        i.children = i.children.sort(sortFn);
+      }
+      return i;
+    })
+    .sort(sortFn);
 }
 
 export function isZhCN(pathname) {
@@ -48,7 +51,8 @@ export function isZhCN(pathname) {
 
 export function getLocalizedPathname(path, zhCN) {
   const pathname = path.startsWith('/') ? path : `/${path}`;
-  if (!zhCN) { // to enUS
+  if (!zhCN) {
+    // to enUS
     return /\/?index-cn/.test(pathname) ? '/' : pathname.replace('-cn', '');
   }
   if (pathname === '/') {
@@ -62,7 +66,12 @@ export function getLocalizedPathname(path, zhCN) {
 
 export function ping(callback) {
   // eslint-disable-next-line
-  const url = 'https://private-a' + 'lipay' + 'objects.alip' + 'ay.com/alip' + 'ay-rmsdeploy-image/rmsportal/RKuAiriJqrUhyqW.png';
+  const url =
+    'https://private-a'
+    + 'lipay'
+    + 'objects.alip'
+    + 'ay.com/alip'
+    + 'ay-rmsdeploy-image/rmsportal/RKuAiriJqrUhyqW.png';
   const img = new Image();
   let done;
   const finish = (status) => {

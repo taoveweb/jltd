@@ -28,7 +28,7 @@ module.exports = {
   source: {
     components: './components',
     docs: './docs',
-    changelog: ['CHANGELOG.zh-CN.md', 'CHANGELOG.en-US.md'],
+    changelog: ['CHANGELOG.zh-CN.md'],
   },
   theme: './site/theme',
   htmlTemplate: './site/theme/static/template.html',
@@ -76,14 +76,6 @@ module.exports = {
     plugins: ['dora-plugin-upload'],
   },
   webpackConfig(config) {
-    /* config.resolve.alias = {
-      'antd/lib': path.join(process.cwd(), 'components'),
-      'antd/es': path.join(process.cwd(), 'components'),
-      antd: path.join(process.cwd(), 'index'),
-      site: path.join(process.cwd(), 'site'),
-      'react-router': 'react-router/umd/ReactRouter',
-    }; */
-
     config.resolve.alias = {
       'jltd/lib': path.join(process.cwd(), 'components'),
       'jltd/es': path.join(process.cwd(), 'components'),
@@ -91,20 +83,6 @@ module.exports = {
       site: path.join(process.cwd(), 'site'),
       'react-router': 'react-router/umd/ReactRouter',
     };
-    /*
-    if(isDev){
-      config.resolve.alias = {
-        'jltd/lib': path.join(process.cwd(), 'components'),
-        'jltd/es': path.join(process.cwd(), 'components'),
-        jltd: path.join(process.cwd(), 'index'),
-        'antd/lib': path.join(process.cwd(), 'node_modules/antd/lib'),
-        'antd/es': path.join(process.cwd(), 'node_modules/antd/es'),
-        antd: path.join(process.cwd(), 'node_modules/antd'),
-        site: path.join(process.cwd(), 'site'),
-        'react-router': 'react-router/umd/ReactRouter',
-      };
-    } */
-
     config.externals = {
       'react-router-dom': 'ReactRouterDOM',
     };

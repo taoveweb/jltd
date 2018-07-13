@@ -12,24 +12,43 @@ const { SubMenu } = Menu;
 
 function getActiveMenuItem(props) {
   const { children } = props.params;
-  return (children && children.replace('-cn', ''))
-    || props.location.pathname.replace(/(^\/|-cn$)/g, '');
+  return (
+    (children && children.replace('-cn', ''))
+    || props.location.pathname.replace(/(^\/|-cn$)/g, '')
+  );
 }
 
 function getModuleData(props) {
   const { pathname } = props.location;
   const moduleName = /^\/?components/.test(pathname)
-    ? 'components' : pathname.split('/').filter(item => item).slice(0, 2).join('/');
-  const moduleData = moduleName === 'components' || moduleName === 'docs/react'
-    || moduleName === 'changelog' || moduleName === 'changelog-cn'
-    ? [...props.picked.components, ...props.picked['docs/react'], ...props.picked.changelog]
+    ? 'components'
+    : pathname
+      .split('/')
+      .filter(item => item)
+      .slice(0, 2)
+      .join('/');
+  const moduleData = moduleName === 'components'
+    || moduleName === 'docs/react'
+    || moduleName === 'CHANGELOG'
+    || moduleName === 'CHANGELOG-cn'
+    ? [
+      ...props.picked.components,
+      ...props.picked['docs/react'],
+      ...props.picked.changelog,
+    ]
     : props.picked[moduleName];
-  const excludedSuffix = utils.isZhCN(props.location.pathname) ? 'en-US.md' : 'zh-CN.md';
-  return moduleData.filter(({ meta }) => !meta.filename.endsWith(excludedSuffix));
+  const excludedSuffix = utils.isZhCN(props.location.pathname)
+    ? 'en-US.md'
+    : 'zh-CN.md';
+  return moduleData.filter(
+    ({ meta }) => !meta.filename.endsWith(excludedSuffix)
+  );
 }
 
 function fileNameToPath(filename) {
-  const snippets = filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '').split('/');
+  const snippets = filename
+    .replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '')
+    .split('/');
   return snippets[snippets.length - 1];
 }
 
@@ -37,7 +56,7 @@ export default class MainContent extends React.Component {
   static contextTypes = {
     intl: PropTypes.object.isRequired,
     isMobile: PropTypes.bool.isRequired,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -62,7 +81,12 @@ export default class MainContent extends React.Component {
     if (!prevProps || prevProps.location.pathname !== location.pathname) {
       this.bindScroller();
     }
-    if (!prevProps || (!window.location.hash && prevProps && prevProps.location.pathname !== location.pathname)) {
+    if (
+      !prevProps
+      || (!window.location.hash
+        && prevProps
+        && prevProps.location.pathname !== location.pathname)
+    ) {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
       return;
@@ -98,7 +122,9 @@ export default class MainContent extends React.Component {
         [].forEach.call(document.querySelectorAll('.toc-affix li a'), (node) => {
           node.className = '';
         });
-        const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
+        const currentNode = document.querySelectorAll(
+          `.toc-affix li a[href="#${element.id}"]`
+        )[0];
         if (currentNode) {
           currentNode.className = 'current';
         }
@@ -107,7 +133,7 @@ export default class MainContent extends React.Component {
 
   handleMenuOpenChange = (openKeys) => {
     this.setState({ openKeys });
-  }
+  };
 
   getSideBarOpenKeys(nextProps) {
     const { themeConfig } = nextProps;
@@ -120,42 +146,58 @@ export default class MainContent extends React.Component {
     const locale = utils.isZhCN(pathname) ? 'zh-CN' : 'en-US';
     if (prevModule !== this.currentModule) {
       const moduleData = getModuleData(nextProps);
-      const shouldOpenKeys = utils.getMenuItems(
-        moduleData,
-        locale,
-        themeConfig.categoryOrder,
-        themeConfig.typeOrder
-      ).map(m => m.title[locale] || m.title);
+      const shouldOpenKeys = utils
+        .getMenuItems(
+          moduleData,
+          locale,
+          themeConfig.categoryOrder,
+          themeConfig.typeOrder
+        )
+        .map(m => m.title[locale] || m.title);
       return shouldOpenKeys;
     }
   }
 
   generateMenuItem(isTop, item) {
-    const { intl: { locale } } = this.context;
+    const {
+      intl: { locale },
+    } = this.context;
     const key = fileNameToPath(item.filename);
     const title = item.title[locale] || item.title;
-    const text = isTop ? title : [
-      <span key="english">{title}</span>,
-      <span className="chinese" key="chinese">{item.subtitle}</span>,
-    ];
+    const text = isTop
+      ? title
+      : [
+        <span key="english">{title}</span>,
+        <span className="chinese" key="chinese">
+          {item.subtitle}
+        </span>,
+      ];
     const { disabled } = item;
-    const url = item.filename.replace(/(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i, '')/* .toLowerCase() */;
+    const url = item.filename.replace(
+      /(\/index)?((\.zh-CN)|(\.en-US))?\.md$/i,
+      ''
+    );
     const child = !item.link ? (
       <Link
-        to={utils.getLocalizedPathname(/^components/.test(url) ? `${url}/` : url, locale === 'zh-CN')}
+        to={utils.getLocalizedPathname(
+          /^components/.test(url) ? `${url}/` : url,
+          locale === 'zh-CN'
+        )}
         disabled={disabled}
       >
         {text}
-      </Link>) : (
-        <a
-          href={item.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          disabled={disabled}
-          className="menu-item-link-outside"
-        >
-          {text} <Icon type="export" />
-        </a>);
+      </Link>
+    ) : (
+      <a
+        href={item.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        disabled={disabled}
+        className="menu-item-link-outside"
+      >
+        {text} <Icon type="export" />
+      </a>
+    );
 
     return (
       <Menu.Item key={key.toLowerCase()} disabled={disabled}>
@@ -166,14 +208,18 @@ export default class MainContent extends React.Component {
 
   getMenuItems() {
     const { themeConfig } = this.props;
-    const { intl: { locale } } = this.context;
+    const {
+      intl: { locale },
+    } = this.context;
     const moduleData = getModuleData(this.props);
     const menuItems = utils.getMenuItems(
       moduleData,
       locale,
       themeConfig.categoryOrder,
-      themeConfig.typeOrder,
+      themeConfig.typeOrder
     );
+
+
     return menuItems.map((menuItem) => {
       if (menuItem.children) {
         return (
@@ -182,9 +228,11 @@ export default class MainContent extends React.Component {
               if (child.type === 'type') {
                 return (
                   <Menu.ItemGroup title={child.title} key={child.title}>
-                    {child.children.sort((a, b) => {
-                      return a.title.charCodeAt(0) - b.title.charCodeAt(0);
-                    }).map(leaf => this.generateMenuItem(false, leaf))}
+                    {child.children
+                      .sort((a, b) => {
+                        return a.title.charCodeAt(0) - b.title.charCodeAt(0);
+                      })
+                      .map(leaf => this.generateMenuItem(false, leaf))}
                   </Menu.ItemGroup>
                 );
               }
@@ -204,7 +252,9 @@ export default class MainContent extends React.Component {
     if (Array.isArray(menu)) {
       return menu.reduce((acc, item) => acc.concat(this.flattenMenu(item)), []);
     }
-    return this.flattenMenu((menu.props && menu.props.children) || menu.children);
+    return this.flattenMenu(
+      (menu.props && menu.props.children) || menu.children
+    );
   }
 
   getFooterNav(menuItems, activeMenuItem) {
@@ -241,28 +291,53 @@ export default class MainContent extends React.Component {
         onOpenChange={this.handleMenuOpenChange}
       >
         {menuItems}
-      </Menu>);
+      </Menu>
+    );
     return (
       <div className="main-wrapper">
         <Row>
           {isMobile ? (
             <MobileMenu
-              iconChild={[<Icon type="menu-unfold" />, <Icon type="menu-fold" />]}
+              iconChild={[
+                <Icon type="menu-unfold" />,
+                <Icon type="menu-fold" />,
+              ]}
               key="Mobile-menu"
               wrapperClassName="drawer-wrapper"
             >
               {menuChild}
-            </MobileMenu>) : (
-              <Col xxl={4} xl={5} lg={6} md={24} sm={24} xs={24} className="main-menu">
-                {menuChild}
-              </Col>
+            </MobileMenu>
+          ) : (
+            <Col
+              xxl={4}
+              xl={5}
+              lg={6}
+              md={24}
+              sm={24}
+              xs={24}
+              className="main-menu"
+            >
+              {menuChild}
+            </Col>
           )}
-          <Col xxl={20} xl={19} lg={18} md={24} sm={24} xs={24} className={mainContainerClass}>
-            {
-              props.demos
-                ? <ComponentDoc {...props} doc={localizedPageData} demos={props.demos} />
-                : <Article {...props} content={localizedPageData} />
-            }
+          <Col
+            xxl={20}
+            xl={19}
+            lg={18}
+            md={24}
+            sm={24}
+            xs={24}
+            className={mainContainerClass}
+          >
+            {props.demos ? (
+              <ComponentDoc
+                {...props}
+                doc={localizedPageData}
+                demos={props.demos}
+              />
+            ) : (
+              <Article {...props} content={localizedPageData} />
+            )}
           </Col>
         </Row>
 
@@ -276,16 +351,16 @@ export default class MainContent extends React.Component {
             xs={24}
           >
             <section className="prev-next-nav">
-              {
-                prev
-                  ? React.cloneElement(prev.props.children || prev.children[0], { className: 'prev-page' })
-                  : null
-              }
-              {
-                next
-                  ? React.cloneElement(next.props.children || next.children[0], { className: 'next-page' })
-                  : null
-              }
+              {prev
+                ? React.cloneElement(prev.props.children || prev.children[0], {
+                  className: 'prev-page',
+                })
+                : null}
+              {next
+                ? React.cloneElement(next.props.children || next.children[0], {
+                  className: 'next-page',
+                })
+                : null}
             </section>
           </Col>
         </Row>
