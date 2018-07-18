@@ -14,13 +14,13 @@ checkbox 不可用。
 Disabled checkbox.
 
 ````jsx
-import { Checkbox } from 'antd';
+import { Checkbox } from 'jltd';
 
 ReactDOM.render(
   <div>
     <Checkbox defaultChecked={false} disabled />
     <br />
     <Checkbox defaultChecked disabled />
-  </div>
-  , mountNode);
+  </div>,
+  mountNode);
 ````

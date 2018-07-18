@@ -15,7 +15,7 @@ If you need several buttons, we recommend that you use 1 primary button + n seco
 
 
 ````jsx
-import { Button, Menu, Dropdown, Icon } from 'antd';
+import { Button, Menu, Dropdown, Icon } from 'jltd';
 
 function handleMenuClick(e) {
   console.log('click', e);

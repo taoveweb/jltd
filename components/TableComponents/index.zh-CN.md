@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 表格组件
-type: Data Display
+type: self-table
 cols: 1
 title: TableComponents
 toc: false

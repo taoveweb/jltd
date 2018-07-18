@@ -16,7 +16,7 @@ There are three sizes of an Input box: `large` (40px)、`default` (32px) and `sm
 
 
 ````jsx
-import { Input } from 'antd';
+import { Input } from 'jltd';
 
 ReactDOM.render(
   <div className="example-input">

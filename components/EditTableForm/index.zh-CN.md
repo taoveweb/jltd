@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 编缉表格表单
-type: Data Display
+type: self-table
 cols: 1
 title: EditTableForm
 toc: false

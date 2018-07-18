@@ -14,7 +14,7 @@ title:
 Add prefix or suffix icons inside input.
 
 ````jsx
-import { Input, Icon } from 'antd';
+import { Input, Icon } from 'jltd';
 
 class App extends React.Component {
   constructor(props) {

@@ -1,8 +1,5 @@
-import Row from './row';
-import Col from './col';
-
-export { RowProps } from './row';
-export { ColProps, ColSize } from './col';
+import {Row}from 'antd';
+import {Col} from 'antd';
 
 export {
   Row,

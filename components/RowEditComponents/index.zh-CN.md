@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 行编缉组件
-type: Data Display
+type: self-table
 cols: 1
 title: RowEditComponents
 toc: false

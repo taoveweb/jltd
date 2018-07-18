@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 标准表格
-type: Data Display
+type: self-table
 cols: 1
 title: StandardTable
 toc: false

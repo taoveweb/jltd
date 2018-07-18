@@ -14,13 +14,13 @@ title:
 Basic usage of checkbox.
 
 ````jsx
-import { Checkbox } from 'antd';
+import { Checkbox } from 'jltd';
 
 function onChange(e) {
   console.log(`checked = ${e.target.checked}`);
 }
 
 ReactDOM.render(
-  <Checkbox onChange={onChange}>Checkbox</Checkbox>
-, mountNode);
+  <Checkbox onChange={onChange}>Checkbox</Checkbox>,
+  mountNode);
 ````

@@ -34,7 +34,7 @@
         line-height: @input-height-base;
         text-align: center;
         .@{iconfont-css-prefix} {
-          transition: all 0.3s;
+          transition: all .3s;
           color: @disabled-color;
           &:hover {
             color: @text-color-secondary;
@@ -98,7 +98,7 @@
         text-overflow: ellipsis;
         padding: 6px @control-padding-horizontal;
         min-height: 32px;
-        transition: all 0.3s;
+        transition: all .3s;
         > span {
           padding-right: 0;
         }
@@ -137,12 +137,6 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .ant-checkbox-wrapper {
-        margin-left: 12px;
-      }
     }
   }
 
@@ -152,7 +146,7 @@
     margin: 0 8px;
     vertical-align: middle;
 
-    .ant-btn {
+    .@{ant-prefix}-btn {
       display: block;
 
       &:first-child {

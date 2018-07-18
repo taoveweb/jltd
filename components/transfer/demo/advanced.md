@@ -15,17 +15,19 @@ Advanced Usage of Transfer.
 
 You can customize the labels of the transfer buttons, the width and height of the columns, and what should be displayed in the footer.
 
-```jsx
-import { Transfer, Button } from "jltd";
+````jsx
+import { Transfer, Button } from 'jltd';
 
 class App extends React.Component {
   state = {
     mockData: [],
-    targetKeys: []
-  };
+    targetKeys: [],
+  }
+
   componentDidMount() {
     this.getMock();
   }
+
   getMock = () => {
     const targetKeys = [];
     const mockData = [];
@@ -34,7 +36,7 @@ class App extends React.Component {
         key: i.toString(),
         title: `content${i + 1}`,
         description: `description of content${i + 1}`,
-        chosen: Math.random() * 2 > 1
+        chosen: Math.random() * 2 > 1,
       };
       if (data.chosen) {
         targetKeys.push(data.key);
@@ -42,21 +44,24 @@ class App extends React.Component {
       mockData.push(data);
     }
     this.setState({ mockData, targetKeys });
-  };
-  handleChange = targetKeys => {
+  }
+
+  handleChange = (targetKeys) => {
     this.setState({ targetKeys });
-  };
+  }
+
   renderFooter = () => {
     return (
       <Button
         size="small"
-        style={{ float: "right", margin: 5 }}
+        style={{ float: 'right', margin: 5 }}
         onClick={this.getMock}
       >
         reload
       </Button>
     );
-  };
+  }
+
   render() {
     return (
       <Transfer
@@ -64,11 +69,9 @@ class App extends React.Component {
         showSearch
         listStyle={{
           width: 250,
-          height: 300
+          height: 300,
         }}
-        titles={["左标题","右标题"]}
-        operations={["to right", "to left"]}
-        direction="left"
+        operations={['to right', 'to left']}
         targetKeys={this.state.targetKeys}
         onChange={this.handleChange}
         render={item => `${item.title}-${item.description}`}
@@ -79,4 +82,4 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, mountNode);
-```
+````

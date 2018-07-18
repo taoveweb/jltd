@@ -83,7 +83,7 @@ class DataDictionaryComponents extends React.Component<
     return (
       <div>
         {editable || editable == null ? (
-          <Select
+          <Select {...this.props}
             disabled={
               this.props.disabled === true || this.props.disabled === 'true'
             }

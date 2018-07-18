@@ -14,7 +14,7 @@ title:
 Using `OptGroup` to group the options.
 
 ````jsx
-import { Select } from 'antd';
+import { Select } from 'jltd';
 const { Option, OptGroup } = Select;
 
 function handleChange(value) {

@@ -15,16 +15,18 @@ title:
 2000 items.
 
 ````jsx
-import { Transfer } from 'antd';
+import { Transfer } from 'jltd';
 
 class App extends React.Component {
   state = {
     mockData: [],
     targetKeys: [],
   }
+
   componentDidMount() {
     this.getMock();
   }
+
   getMock = () => {
     const targetKeys = [];
     const mockData = [];
@@ -42,10 +44,12 @@ class App extends React.Component {
     }
     this.setState({ mockData, targetKeys });
   }
+
   handleChange = (targetKeys, direction, moveKeys) => {
     console.log(targetKeys, direction, moveKeys);
     this.setState({ targetKeys });
   }
+
   render() {
     return (
       <Transfer

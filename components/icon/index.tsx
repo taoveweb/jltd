@@ -1,24 +1,11 @@
 import * as React from 'react';
-import classNames from 'classnames';
-import omit from 'omit.js';
+import { Icon } from 'antd';
 
-export interface IconProps {
-  type: string;
-  className?: string;
-  title?: string;
-  onClick?: React.MouseEventHandler<any>;
-  spin?: boolean;
-  style?: React.CSSProperties;
+ class JltIcon extends React.Component{
+    render() {
+        return (
+            <Icon type="link" {...this.props}/>
+        )
+    }
 }
-
-const Icon = (props: IconProps) => {
-  const { type, className = '', spin } = props;
-  const classString = classNames({
-    anticon: true,
-    'anticon-spin': !!spin || type === 'loading',
-    [`anticon-${type}`]: true,
-  }, className);
-  return <i {...omit(props, ['type', 'spin'])} className={classString} />;
-};
-
-export default Icon;
+export default JltIcon;

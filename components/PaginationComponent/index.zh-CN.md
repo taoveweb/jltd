@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 分页组件
-type: Navigation
+type: self-table
 cols: 1
 title: PaginationComponent
 toc: false

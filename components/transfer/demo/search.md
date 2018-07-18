@@ -14,16 +14,18 @@ title:
 Transfer with a search box.
 
 ````jsx
-import { Transfer } from 'antd';
+import { Transfer } from 'jltd';
 
 class App extends React.Component {
   state = {
     mockData: [],
     targetKeys: [],
   }
+
   componentDidMount() {
     this.getMock();
   }
+
   getMock = () => {
     const targetKeys = [];
     const mockData = [];
@@ -41,12 +43,15 @@ class App extends React.Component {
     }
     this.setState({ mockData, targetKeys });
   }
+
   filterOption = (inputValue, option) => {
     return option.description.indexOf(inputValue) > -1;
   }
+
   handleChange = (targetKeys) => {
     this.setState({ targetKeys });
   }
+
   render() {
     return (
       <Transfer

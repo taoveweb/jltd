@@ -14,7 +14,7 @@ title:
 Search the options while expanded.
 
 ````jsx
-import { Select } from 'antd';
+import { Select } from 'jltd';
 const Option = Select.Option;
 
 function handleChange(value) {
