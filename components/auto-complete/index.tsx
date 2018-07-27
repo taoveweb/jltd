@@ -8,7 +8,8 @@ import { AutoComplete } from 'antd';
     static OptGroup: typeof OptGroup;
     render() {
         return (
-            <AutoComplete   />
+            <AutoComplete  {...this.props}  >
+            </AutoComplete>
         )
     }
 }

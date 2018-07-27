@@ -33,6 +33,8 @@ const mdmRoute = 'mdmRoute';
 const mdmRouteSite = 'mdmRouteSite';
 const mdmDriverVehicleBinding = 'mdmDriverVehicleBinding';
 const mdmAccount = 'mdmAccount';
+const exception ='exception';
+
 const url = {
   file: {
     get selectEsFileList() {
@@ -131,6 +133,9 @@ const url = {
   system: {
     get getDataDictionary() {
       return `${host}${system}/getDataDictionary`;
+    },
+     getSelectData() {
+      return `${host}${system}/getCompanyType`;
     },
   },
   cdDictionary: {
@@ -638,6 +643,11 @@ const url = {
     },
     get selectAccountToDetail() {
       return `${host}${mdmAccount}/selectAccountToDetail`;
+    },
+  },
+  exception: {
+    upload() {
+      return `${host}${exception}/upload`;
     },
   },
 };

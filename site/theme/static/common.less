@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  transition: color .3s ease;
+  transition: color 0.3s ease;
   &:focus {
     text-decoration: underline;
     text-decoration-skip: ink;
@@ -28,7 +28,7 @@ a {
 }
 
 .main-container {
-  padding: 0 170px 144px 64px;
+  padding: 0 170px 144px 64px !important;
   background: #fff;
   min-height: 500px;
   overflow: hidden;
@@ -70,7 +70,7 @@ a {
       position: absolute;
       right: -10px;
       top: 16px;
-      transition: all .3s;
+      transition: all 0.3s;
     }
     &:hover .anticon {
       opacity: 1;
@@ -82,7 +82,7 @@ a {
   font-size: 12px;
   margin-left: 6px;
   font-weight: normal;
-  opacity: .67;
+  opacity: 0.67;
 }
 
 .outside-link {
@@ -90,8 +90,8 @@ a {
 }
 
 .outside-link:after {
-  content: '\e691';
-  font-family: 'anticon';
+  content: "\e691";
+  font-family: "anticon";
   margin-left: 5px;
   font-size: 12px;
   color: #aaa;
@@ -112,7 +112,7 @@ a {
 }
 
 #react-content {
-  transition: transform .3s @ease-in-out-circ;
+  transition: transform 0.3s @ease-in-out-circ;
   height: 100%;
 }
 .page-wrapper {

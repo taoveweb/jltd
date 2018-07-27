@@ -14,7 +14,7 @@ title:
 Change the suggestions placement.
 
 ````jsx
-import { Mention } from 'antd';
+import { Mention } from 'jltd';
 
 const { toString } = Mention;
 

@@ -1,25 +1,27 @@
 import * as React from 'react';
 import { Select } from 'antd';
+import * as $ from 'jquery';
 const styles = require('./DataDictionaryComponents.less');
-//import url from '../_util/url';
+
+import url from '../_util/url';
 const Option = Select.Option;
 type DataDictionaryComponentsState = {
   dataDictionaryList: undefined[];
   loading: boolean;
 };
 interface DataDictionaryComponentsprops {
-  codeType: any;
-  dropdownMatchSelectWidth: any;
-  style: any;
-  placeholder: any;
-  value: any;
-  disabled: any;
-  allowClear: any;
-  defaultValue: any;
-  onChange: any;
-  className: any;
-  mode: any;
-  editable: any;
+  codeType?: any;
+  dropdownMatchSelectWidth?: any;
+  style?: any;
+  placeholder?: any;
+  value?: any;
+  disabled?: any;
+  allowClear?: any;
+  defaultValue?: any;
+  onChange?: any;
+  className?: any;
+  mode?: any;
+  editable?: any;
 }
 // 数据字典
 class DataDictionaryComponents extends React.Component<
@@ -38,7 +40,7 @@ class DataDictionaryComponents extends React.Component<
   }
   // 用state信息搜索模板----------&&&&&&&&&&&&&&&&重写
   searchTemplateForState = () => {
-    /* const { codeType } = this.props;
+    const { codeType } = this.props;
     const self = this;
     this.setState({
       loading: true,
@@ -64,7 +66,7 @@ class DataDictionaryComponents extends React.Component<
           });
         }
       },
-    }); */
+    });
   };
   render() {
     const { editable } = this.props;
@@ -83,7 +85,8 @@ class DataDictionaryComponents extends React.Component<
     return (
       <div>
         {editable || editable == null ? (
-          <Select {...this.props}
+          <Select
+            {...this.props}
             disabled={
               this.props.disabled === true || this.props.disabled === 'true'
             }

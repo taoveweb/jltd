@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { Popconfirm } from 'antd';
  
- class JltPopconfirm extends React.Component{
-   
+interface PopconfirmProps  {
+    title: React.ReactNode;
+}
+
+class JltPopconfirm extends React.Component<PopconfirmProps,any>{
     render() {
         return (
-            <Popconfirm title {...this.props}/>
+            <Popconfirm title={this.props.title} {...this.props}/>
         )
     }
 }

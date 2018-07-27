@@ -25,6 +25,7 @@ if (typeof window !== 'undefined') {
   window.react = React;
   window['react-dom'] = ReactDOM;
   window.antd = require('antd');
+  window.jltd = require('jltd');
   /* eslint-enable global-require */
 }
 
@@ -36,7 +37,7 @@ enquireScreen((b) => {
 export default class Layout extends React.Component {
   static contextTypes = {
     router: PropTypes.object.isRequired,
-  }
+  };
 
   static childContextTypes = {
     isMobile: PropTypes.bool,
@@ -100,7 +101,7 @@ export default class Layout extends React.Component {
           <div className="page-wrapper">
             {/* <Header {...restProps} /> */}
             {children}
-           {/*  <Footer {...restProps} /> */}
+            {/*  <Footer {...restProps} /> */}
           </div>
         </LocaleProvider>
       </IntlProvider>

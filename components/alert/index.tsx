@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Alert } from 'antd';
 
- class JltAlert extends React.Component{
-    render() {
-        return (
-            <Alert message {...this.props}/>
-        )
-    }
+interface JltAlertProps {
+  message: React.ReactNode;
+}
+class JltAlert extends React.Component<JltAlertProps, {}> {
+  render() {
+    return <Alert message={this.props.message} {...this.props} />;
+  }
 }
 export default JltAlert;

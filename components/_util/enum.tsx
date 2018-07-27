@@ -216,6 +216,33 @@ const Enum = {
       value: "8"
     }
   ],
+  //数据库数字类型长度限制(例：TWENTY_THREE :在数据库中为 double(20,3) 长20位 3位小数 )
+  DB_LENGTH_LIMIT: {
+    TWENTY_THREE: {
+        VALUE: 9999999999999999,
+    },
+    TWENTY_SIX: {
+        VALUE: 9999999999999,
+    },
+    FIFTY_THREE: {
+        VALUE: 9999999999999999999999999999999999999999999999,
+    },
+    TEN: {
+        VALUE: 2000000000,   //DB为int(10) BO为Integer Integer.NAX=2147483647  故暂取值：2000000000
+    },
+    TWELVE_TWO: {
+        VALUE: 999999999,
+    },
+    TEN_ZERO: {
+        VALUE: 999999999,
+    },
+    EIGHTEEN_TWO: {
+        VALUE: 999999999999999,
+    },
+    EIGHT_TWO: {
+        VALUE: 99999,
+    },
+  },
   business_industry: [
     { text: "餐饮", value: "10" },
     { text: "食品", value: "30" },

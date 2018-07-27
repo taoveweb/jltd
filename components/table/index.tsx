@@ -1,3 +1,13 @@
-import {Table} from 'antd';
+import * as React from 'react';
+import { Table } from 'antd';
 
-export default Table;
+class JltTable extends React.Component{
+  
+    render() {
+        return (
+            <Table  {...this.props}/>
+        )
+    }
+}
+
+export default JltTable;

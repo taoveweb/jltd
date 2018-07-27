@@ -1,0 +1,35 @@
+@import "../../style/themes/default";
+
+@tagSelect-prefix-cls: ~"@{ant-prefix}-tagSelect";
+
+.@{tagSelect-prefix-cls} {
+  user-select: none;
+  margin-left: -8px;
+  position: relative;
+  overflow: hidden;
+  max-height: 32px;
+  line-height: 32px;
+  transition: all 0.3s;
+
+  .ant-tag {
+    padding: 0 8px;
+    margin-right: 24px;
+    font-size: @font-size-base;
+  }
+
+  &.@{tagSelect-prefix-cls}-expanded {
+    transition: all 0.3s;
+    max-height: 200px;
+  }
+  .@{tagSelect-prefix-cls}-trigger {
+    position: absolute;
+    top: 0;
+    right: 0;
+    i {
+      font-size: 12px;
+    }
+  }
+  &.@{tagSelect-prefix-cls}-hasExpandTag {
+    padding-right: 50px;
+  }
+}
