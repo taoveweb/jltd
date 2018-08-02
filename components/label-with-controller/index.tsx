@@ -13,7 +13,7 @@ import {
 import classnames from 'classnames';
 import * as moment from 'moment';
 import RanderRange from './RanderRange';
-const styles = require('./style/index');
+const styles = require('./style/index.less');
 import DataDictionaryComponents from '../DataDictionaryComponents';
 import Enum from '../_util/enum';
 

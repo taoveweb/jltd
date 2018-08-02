@@ -9,6 +9,8 @@ interface IHeaderSearchProps {
   onPressEnter: Function;
   className: any;
   placeholder: any;
+  dataSource?: any;
+  onSearch?: any;
 }
 
 export default class HeaderSearch extends React.PureComponent<

@@ -7,18 +7,18 @@ const preCls = 'ant-pro-popover';
 
 const { TabPane } = Tabs;
 interface INoticeIconProps {
-  children: any;
-  onItemClick: any;
-  onTabChange: any;
-  oading: any;
-  locale: any;
-  onClear: any;
-  loading: any;
-  className: any;
-  count: any;
-  popupAlign: any;
-  onPopupVisibleChange: any;
-  popupVisible: any;
+  children?: any;
+  onItemClick?: any;
+  onTabChange?: any;
+  oading?: any;
+  locale?: any;
+  onClear?: any;
+  loading?: any;
+  className?: any;
+  count?: any;
+  popupAlign?: any;
+  onPopupVisibleChange?: any;
+  popupVisible?: any;
 }
 
 interface INoticeIconState {
@@ -28,7 +28,7 @@ export default class NoticeIcon extends PureComponent<
   INoticeIconProps,
   INoticeIconState
 > {
-  static Tab = TabPane;
+  static Tab: any = TabPane;
 
   static defaultProps = {
     onItemClick: () => {},
@@ -86,7 +86,7 @@ export default class NoticeIcon extends PureComponent<
     });
     return (
       <Spin spinning={loading} delay={0}>
-        <Tabs className={'${preCls}-tabs'} onChange={this.onTabChange}>
+        <Tabs className={`${preCls}-tabs`} onChange={this.onTabChange}>
           {panes}
         </Tabs>
       </Spin>
@@ -100,12 +100,12 @@ export default class NoticeIcon extends PureComponent<
       onPopupVisibleChange,
       popupVisible,
     } = this.props;
-    const noticeButtonClass = classNames(className, '${preCls}-noticeButton');
+    const noticeButtonClass = classNames(className, `${preCls}-noticeButton`);
     const notificationBox = this.getNotificationBox();
     const trigger = (
       <span className={noticeButtonClass}>
-        <Badge count={count} className={'${preCls}-badge'}>
-          <Icon type="bell" className={'${preCls}-icon'} />
+        <Badge count={count} className={`${preCls}-badge`}>
+          <Icon type="bell" className={`${preCls}-icon`} />
         </Badge>
       </span>
     );

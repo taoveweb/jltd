@@ -43,6 +43,8 @@ export { default as NumberInfo } from './number-info';
 export { default as NoticeIcon } from './notice-icon';
 export { default as Login } from './login';
 export { default as HeaderSearch } from './header-search';
+export { default as GlobalHeader } from './global-header';
+export { default as Exception } from './exception';
 
 export { default as Icon } from './icon';
 export { default as Layout } from './layout';
