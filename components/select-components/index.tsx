@@ -77,21 +77,24 @@ class SelectComponents extends React.Component<
     const { codeType } = this.props;
 
     var self = this;
-    $.ajax({
-      url: url.system.getSelectData(),
-      data: { codeType: codeType },
-      cache: false,
-      async: false,
-      type: 'POST',
-      dataType: 'json',
-      success: function(data: any) {
-        if (data.data) {
-          self.setState({
-            dataDictionaryList: data.data,
-          });
-        }
-      },
-    });
+    if(url && url.system){
+      $.ajax({
+        url: url.system.getSelectData(),
+        data: { codeType: codeType },
+        cache: false,
+        async: false,
+        type: 'POST',
+        dataType: 'json',
+        success: function(data: any) {
+          if (data.data) {
+            self.setState({
+              dataDictionaryList: data.data,
+            });
+          }
+        },
+      });
+    }
+    
   };
 
   render() {

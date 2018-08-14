@@ -202,7 +202,7 @@
     "tsc": "tsc",
     "start": "rimraf _site && mkdir _site && node ./scripts/generateColorLess.js && cross-env NODE_ENV=development bisheng start -c ./site/bisheng.config.js",
     "start:preact": "node ./scripts/generateColorLess.js && cross-env NODE_ENV=development REACT_ENV=preact bisheng start -c ./site/bisheng.config.js",
-    "site": "cross-env NODE_ENV=production bisheng build --ssr -c ./site/bisheng.config.js && node ./scripts/generateColorLess.js",
+    "site": "cross-env NODE_ENV=production bisheng build -c ./site/bisheng.config.js && node ./scripts/generateColorLess.js",
     "predeploy": "antd-tools run clean && npm run site && cp netlify.toml _site",
     "deploy": "bisheng gh-pages --push-only",
     "authors": "git log --format='%aN <%aE>' | sort -u | grep -v 'users.noreply.github.com' | grep -v 'gitter.im' | grep -v '.local>' | grep -v 'alibaba-inc.com' | grep -v 'alipay.com' | grep -v 'taobao.com' > AUTHORS.txt",

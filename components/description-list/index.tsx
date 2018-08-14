@@ -1,4 +1,4 @@
-const DescriptionList: any = require('./DescriptionList');
+const DescriptionList = require('./DescriptionList').default;
 import Description from './Description';
 
 DescriptionList.Description = Description;

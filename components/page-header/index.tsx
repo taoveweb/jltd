@@ -2,7 +2,7 @@
 import { PureComponent, createElement } from 'react';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-const pathToRegexp = require('path-to-regexp');
+const pathToRegexp = require('path-to-regexp').default;
 import { Breadcrumb, Tabs } from 'antd';
 import classNames from 'classnames';
 import { urlToList } from '../_util/pathTools';

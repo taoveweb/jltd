@@ -6,9 +6,7 @@ title: Standard
 标准页头。
 
 ````jsx
-import {PageHeader}  from 'jltd';
-import DescriptionList from 'jltd';
-import { Button, Menu, Dropdown, Icon, Row, Col } from 'jltd';
+import { Button, Menu, Dropdown, Icon, Row, Col,DescriptionList ,PageHeader} from 'jltd';
 
 const { Description } = DescriptionList;
 const ButtonGroup = Button.Group;

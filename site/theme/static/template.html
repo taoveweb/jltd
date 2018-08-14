@@ -10,7 +10,6 @@
     <!--[if IE]>
     <script src="https://as.alipayobjects.com/g/component/??es6-shim/0.35.1/es6-sham.min.js,es6-shim/0.35.1/es6-shim.min.js"></script>
     <![endif]-->
-   
     <script src="//unpkg.com/react@16/umd/react.production.min.js"></script>
     <script src="//unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/react-router-dom/4.2.2/react-router-dom.min.js"></script>
@@ -56,7 +55,7 @@
 
       // 首页无视链接里面的语言设置 https://github.com/ant-design/ant-design/issues/4552
       if (isLocalStorageNameSupported() && (pathname === '/' || pathname === '/index-cn')) {
-        var lang = (window.localStorage && localStorage.getItem('locale')) || ((navigator.language || navigator.browserLanguage).toLowerCase() === 'zh-cn' ? 'zh-CN' : 'en-US');
+        var lang = (window.localStorage && localStorage.getItem('locale')) || ((navigator.language || navigator.browserLanguage).toLowerCase() === 'zh-cn' ? 'zh-CN' : 'zh-CN');
         // safari is 'zh-cn', while other browser is 'zh-CN';
         if ((lang === 'zh-CN') !== isZhCN(pathname)) {
           location.pathname = getLocalizedPathname(pathname, lang === 'zh-CN');
@@ -66,7 +65,8 @@
     })()
     </script>
     <link rel="icon" href="https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png" type="image/x-icon">
-
+    <link rel="stylesheet" type="text/css" href="{{ root }}index-1.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ root }}index-2.css"/>
     <style id="nprogress-style">
       #nprogress { display: none }
     </style>
