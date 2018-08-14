@@ -1,1 +1,1 @@
-import './index.less';
+import 'antd/lib/mention/style/index.less';

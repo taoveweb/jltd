@@ -1,5 +1,5 @@
-import '../../style/index.less';
-import './index.less';
+import 'antd/lib/style/index.less';
+import 'antd/lib/select/style/index.less';
 
 // style dependencies
-import '../../input/style';
+import 'antd/lib/input/style';

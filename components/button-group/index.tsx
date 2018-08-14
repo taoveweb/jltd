@@ -4,14 +4,15 @@ import { Button, Popconfirm, Dropdown, Menu, Icon } from 'antd';
 import classnames from 'classnames';
 import { connect } from 'dva';
 import buttonPermission from './buttonPermission';
-//import ImportExcel from '../../routes/impexp/importExcel';  //外引用组件
+import ImportExcel from './importExcel';  //外引用组件
+import operationButtonGroup from "./operationButtonGroup"
 const { SubMenu } = Menu;
 const renderButton: any = (buttonInfo: any) => {
   let disabled = buttonInfo.disabled;
   if ((buttonInfo.loading || buttonInfo.text === '保存') && buttonInfo.load) {
     disabled = true;
   }
-  return buttonInfo.templateId ? null /* <ImportExcel buttonInfo={buttonInfo} /> */ : (
+  return buttonInfo.templateId ? <ImportExcel buttonInfo={buttonInfo} /> : (
     <Button
       className={classnames('button-group', buttonInfo.className)}
       type={buttonInfo.type || 'default'}
@@ -29,7 +30,7 @@ const renderButton: any = (buttonInfo: any) => {
   );
 };
 const renderMenuItem = (buttonInfo: any) => {
-  return buttonInfo.templateId ? null /* <ImportExcel buttonInfo={buttonInfo} buttonType="a" /> */ : (
+  return buttonInfo.templateId ? <ImportExcel buttonInfo={buttonInfo} buttonType="a" /> : (
     <a onClick={buttonInfo.onClick}>{buttonInfo.text}</a>
   );
 };
@@ -158,5 +159,6 @@ const NewGlobalBotton = connect(({ global }: { global: any }) => ({
   load: global.load,
 }))(GlobalButton);
 
+buttonGroup.operationButtonGroup=operationButtonGroup;
 buttonGroup.renderButton = renderButton;
 export default buttonGroup;

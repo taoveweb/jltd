@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: StandardFormRow
-type: pro component
+type: ant-pro
 cols: 1
 title: StandardFormRow
 toc: false

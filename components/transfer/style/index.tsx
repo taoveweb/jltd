@@ -1,7 +1,7 @@
-import '../../style/index.less';
-import './index.less';
+import 'antd/lib/style/index.less';
+import 'antd/lib/transfer/style/index.less';
 
 // style dependencies
-import '../../checkbox/style';
-import '../../button/style';
-import '../../input/style';
+import 'antd/lib/checkbox/style';
+import 'antd/lib/button/style';
+import 'antd/lib/input/style';

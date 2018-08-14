@@ -1,5 +1,5 @@
 //const host = getRootPath();
-const host = '/jlt-workplat-web/';
+/* const host = '/jlt-workplat-web/';
 const rest = 'rest';
 const customerList = 'customerList';
 const importBatch = 'importBatch';
@@ -33,9 +33,9 @@ const mdmRoute = 'mdmRoute';
 const mdmRouteSite = 'mdmRouteSite';
 const mdmDriverVehicleBinding = 'mdmDriverVehicleBinding';
 const mdmAccount = 'mdmAccount';
-const exception ='exception';
+const exception ='exception'; */
 
-const url = {
+const url =(window as any).globalUrl /* {
   file: {
     get selectEsFileList() {
       return `${host}${file}/selectEsFileList`;
@@ -650,5 +650,5 @@ const url = {
       return `${host}${exception}/upload`;
     },
   },
-};
+}; */
 export default url;

@@ -13,7 +13,7 @@ import {
 import classnames from 'classnames';
 import * as moment from 'moment';
 import RanderRange from './RanderRange';
-const styles = require('./style/index.less');
+// const styles = require('./style/index.less');
 import DataDictionaryComponents from '../DataDictionaryComponents';
 import Enum from '../_util/enum';
 
@@ -83,7 +83,7 @@ export interface LabelWithControllerProps {
 const LabelWithController = (props: LabelWithControllerProps) => {
   // 必填的星号提示
   const renderRequire = props.isRequire ? (
-    <span className={styles['label-require']}>*</span>
+    <span className={'label-require'}>*</span>
   ) : null;
 
   // 感叹号提示语
@@ -107,8 +107,8 @@ const LabelWithController = (props: LabelWithControllerProps) => {
     renderController = (
       <div
         className={classnames(
-          styles['view-style'],
-          styles['radio-group-style'],
+          'view-style',
+          'radio-group-style',
           props.viewStyle
         )}
       >
@@ -129,7 +129,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
       <InputNumber
         value={props.value}
         {...valueProps}
-        className={classnames(styles['view-style'], props.viewStyle)}
+        className={classnames('view-style', props.viewStyle)}
         min={props.min ? props.min : 0}
         max={props.max ? props.max : Enum.DB_LENGTH_LIMIT.TWENTY_THREE.VALUE}
         step={props.step ? props.step : 1}
@@ -156,7 +156,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         {...valueProps}
         defaultValue={props.defaultValue}
         placeholder={props.placeholder}
-        className={classnames(styles['view-style'], props.viewStyle)}
+        className={classnames('view-style', props.viewStyle)}
         disabled={props.disabled === true}
         onChange={e => {
           props.onChange && props.onChange(e.target.value.trim());
@@ -183,7 +183,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         rows={props.rows === undefined ? 4 : props.rows}
         value={props.value}
         placeholder={props.placeholder}
-        className={classnames(styles['view-style'], props.viewStyle)}
+        className={classnames('view-style', props.viewStyle)}
         disabled={props.disabled === true}
         onChange={e => {
           props.onChange && props.onChange(e.target.value.trim());
@@ -206,7 +206,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         placeholder={props.placeholder}
         onSearch={props.onSearch}
         disabled={props.disabled || false}
-        className={classnames(styles['view-style'], props.viewStyle)}
+        className={classnames('view-style', props.viewStyle)}
         suffix={props.suffix || null}
         readOnly={props.readOnly}
         onChange={e => {
@@ -245,7 +245,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         optionFilterProp={optionFilterProp}
         value={props.value || undefined}
         defaultValue={props.defaultValue}
-        className={classnames(styles['view-style'], props.viewStyle)}
+        className={classnames('view-style', props.viewStyle)}
         onChange={props.onChange}
         filterOption={props.filterOption}
         getPopupContainer={() =>
@@ -268,7 +268,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
   if (props.type === 'dataPicker') {
     renderController = (
       <DatePicker
-        className={classnames(styles['view-style'], props.viewStyle)}
+        className={classnames('view-style', props.viewStyle)}
         defaultValue={props.defaultValue}
         format={props.format ? props.format : 'YYYY-MM-DD HH:mm:ss'}
         showTime={props.showTime != true}
@@ -294,7 +294,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
             ? [moment(props.DateBegin), moment(props.DateEnd)]
             : []
         }
-        className={classnames(styles['view-style'], props.viewStyle)}
+        className={classnames('view-style', props.viewStyle)}
         onChange={(moments, dateStrings) => {
           props.onChange &&
             props.onChange(dateStrings[0], dateStrings[1], moments);
@@ -315,7 +315,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
       <Cascader
         allowClear
         options={props.options}
-        className={classnames(styles['view-style'], props.viewStyle)}
+        className={classnames('view-style', props.viewStyle)}
         onChange={(value, options) => {
           const newopations: any = options;
           if (newopations.length < 2) {
@@ -346,14 +346,14 @@ const LabelWithController = (props: LabelWithControllerProps) => {
     renderController = (
       <div
         className={classnames(
-          styles['view-style'],
-          styles['checkbox-style'],
+          'view-style',
+          'checkbox-style',
           props.viewStyle
         )}
       >
         <Checkbox
           defaultChecked={props.defaultValue}
-          className={styles['view-style']}
+          className={'view-style'}
           onChange={props.onChange}
         />
       </div>
@@ -380,7 +380,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         disabled={props.disabled || false}
         value={props.value}
         defaultValue={props.defaultValue}
-        className={props.className || styles['view-style']}
+        className={props.className || 'view-style'}
         onChange={props.onChange}
         dropdownMatchSelectWidth={
           props.dropdownMatchSelectWidth === undefined
@@ -399,11 +399,11 @@ const LabelWithController = (props: LabelWithControllerProps) => {
   }
   //const span = props.span;
   if (props.type === 'div') {
-    return <div className={styles['controller-style']} />;
+    return <div className={'ant-label-controller-style'} />;
   }
   return (
-    <div className={props.className || styles['controller-style']}>
-      <div className={props.labelClass || styles['label-text']}>
+    <div className={props.className || 'ant-label-controller-style'}>
+      <div className={props.labelClass || 'label-text'}>
         {renderRequire}
         {renderIconRequire}
         {props.label}

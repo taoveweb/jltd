@@ -1,5 +1,7 @@
 ---
 title: NumberInfo
+category: Components
+type: ant-pro
 subtitle: 数据文本
 cols: 1
 order: 10

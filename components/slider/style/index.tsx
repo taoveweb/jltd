@@ -1,5 +1,5 @@
-import '../../style/index.less';
-import './index.less';
+import 'antd/lib/style/index.less';
+import 'antd/lib/slider/style/index.less';
 
 // style dependencies
-import '../../tooltip/style';
+import 'antd/lib/tooltip/style';

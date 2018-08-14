@@ -1,5 +1,7 @@
 ---
 title: Exception
+category: Components
+type: ant-pro
 subtitle: 异常
 cols: 1
 order: 5

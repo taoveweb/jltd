@@ -1,6 +1,6 @@
 ---
 category: Components
-type: pro component
+type: ant-pro
 title: PageHeader
 subtitle: 页头
 cols: 1

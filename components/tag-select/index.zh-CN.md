@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 标签选择器
-type: pro component
+type: ant-pro
 title: TagSelect
 cols: 1
 order: 13

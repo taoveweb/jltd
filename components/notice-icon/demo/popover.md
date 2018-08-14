@@ -6,10 +6,9 @@ title: 带浮层卡片
 点击展开通知卡片，展现多种类型的通知，通常放在导航工具栏。
 
 ````jsx
-import NoticeIcon from 'ant-design-pro/lib/NoticeIcon';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
-import { Tag } from 'jltd';
+import { Tag,NoticeIcon } from 'jltd';
 
 const data = [{
   id: '000000001',

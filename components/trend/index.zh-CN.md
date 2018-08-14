@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 趋势标记
-type: pro component
+type: ant-pro
 title: Trend
 cols: 1
 order: 14

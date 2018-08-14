@@ -1,7 +1,7 @@
 ---
 category: Components
+type: ant-pro
 subtitle: SiderMenu
-type: pro component
 cols: 1
 title: SiderMenu
 toc: false

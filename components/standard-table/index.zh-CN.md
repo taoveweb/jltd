@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 标准表格
-type: pro component
+type: ant-pro
 cols: 1
 title: StandardTable
 toc: false

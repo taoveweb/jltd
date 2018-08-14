@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { InputNumber } from 'antd';
 import classnames from 'classnames';
-const styles = require('./style/index');
+// const styles = require('./style/index');
+
 
 interface RanderRangeProps {
   onChange?: any;
@@ -35,13 +36,13 @@ class RanderRange extends React.Component<RanderRangeProps, {}> {
     return (
       <div
         className={classnames(
-          styles['inline-block'],
-          styles['controller-style']
+          'inline-block',
+          'ant-label-controller-style'
         )}
       >
-        <div className={styles['randerRange-block']}>
+        <div className={'randerRange-block'}>
           <InputNumber
-            className={styles['randerRange-InputNumber']}
+            className={'randerRange-InputNumber'}
             min={minNumber}
             max={maxNumber}
             value={minValue}
@@ -49,7 +50,7 @@ class RanderRange extends React.Component<RanderRangeProps, {}> {
           />
           <span>{' ~ '}</span>
           <InputNumber
-            className={styles['randerRange-InputNumber']}
+            className={'randerRange-InputNumber'}
             min={minNumber}
             max={maxNumber}
             value={maxValue}

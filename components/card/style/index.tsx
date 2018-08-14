@@ -1,5 +1,5 @@
-import '../../style/index.less';
-import './index.less';
+import 'antd/lib/style/index.less';
+import 'antd/lib/card/style/index.less';
 
 // style dependencies
-import '../../tabs/style';
+import 'antd/lib/tabs/style';

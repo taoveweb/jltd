@@ -1,7 +1,8 @@
 ---
 title: NoticeIcon
+category: Components
+type: ant-pro
 subtitle: 通知菜单
-type: pro
 cols: 1
 order: 9
 ---

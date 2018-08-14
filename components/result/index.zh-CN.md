@@ -1,6 +1,6 @@
 ---
 category: Components
-type: pro component
+type: ant-pro
 title: Result
 subtitle: 处理结果
 cols: 1

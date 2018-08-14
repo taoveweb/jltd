@@ -1,5 +1,5 @@
 /* @remove-on-es-build-begin */
-// this file is not used if use https://github.com/ant-design/babel-plugin-import
+// this file is not used if use https://github.com/ant-design/babel-plugin-import 
 const ENV = process.env.NODE_ENV;
 if (
   ENV !== 'production' &&
@@ -17,11 +17,18 @@ if (
 
 if (ENV === 'production') {
   //export { default as SiderMenu } from './sider-menu'; //ReactRouterDOM
+  //export { default as GlobalHeader } from './global-header';
 }
+
+export { default as SiderMenu } from './sider-menu';
+export { default as GlobalHeader } from './global-header';
+export { default as ButtonGroup } from './button-group';
+export { default as RenderAuthorized } from './render-authorized';
 
 export { default as RowEditComponents } from './row-edit-components';
 export { default as FormComponents } from './form-components';
 export { default as LabelWithController } from './label-with-controller';
+export { default as ModalSearchComponent } from './modal-search-component';
 
 export { default as PaginationComponent } from './pagination-component';
 export { default as EditableCell } from './editable-cell';
@@ -38,13 +45,19 @@ export { default as Trend } from './trend';
 export { default as StandardFormRow } from './standard-form-row';
 export { default as Result } from './result';
 export { default as PageHeader } from './page-header';
-export { default as ButtonGroup } from './button-group';
+
 export { default as NumberInfo } from './number-info';
 export { default as NoticeIcon } from './notice-icon';
 export { default as Login } from './login';
 export { default as HeaderSearch } from './header-search';
-export { default as GlobalHeader } from './global-header';
 export { default as Exception } from './exception';
+export { default as Ellipsis } from './ellipsis';
+export { default as EditableLinkGroup } from './editable-link-group'; 
+ export { default as EditableItem } from './editable-item';
+export { default as DescriptionList } from './description-list';
+export { default as CountDown } from './count-down';
+export { default as AvatarList } from './avatar-list';
+export { default as FooterToolbar } from './footer-toolbar';  
 
 export { default as Icon } from './icon';
 export { default as Layout } from './layout';

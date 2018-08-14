@@ -8,12 +8,9 @@ const eslintrc = {
     es6: true,
   },
   parser: 'babel-eslint',
-  plugins: [
-    'markdown',
-    'react',
-    'babel',
-  ],
+  plugins: ['markdown', 'react', 'babel'],
   rules: {
+    'arrow-parens': 0,
     'func-names': 0,
     'arrow-body-style': 0,
     'react/sort-comp': 0,

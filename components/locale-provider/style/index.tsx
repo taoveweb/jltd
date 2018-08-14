@@ -1,1 +1,1 @@
-import './index.less';
+import 'antd/lib/locale-provider/style/index.less';

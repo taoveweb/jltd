@@ -12,7 +12,7 @@ import {
   InputNumber,
   Icon,
 } from 'antd';
-const styles = require('./style/index.less');
+// const styles = require('./style/index.less');
 import classnames from 'classnames';
 import * as moment from 'moment';
 import RanderRange from '../label-with-controller/RanderRange';
@@ -208,7 +208,7 @@ class FormComponents extends React.Component<
       }
     }
 
-    return <Form onSubmit={this.props.handleSubmit}>{renderController}</Form>;
+    return <Form onSubmit={this.props.handleSubmit} className={'ant-form-components'}>{renderController}</Form>;
   }
 
   regexValid = (value: any, regex: any) => {
@@ -234,7 +234,7 @@ class FormComponents extends React.Component<
           {...valueProps}
           defaultValue={props.defaultValue}
           placeholder={props.placeholder || Enum.DEFAULT_PLACEHOLDER}
-          className={styles['view-style']}
+          className={props.className || 'view-style'}
           disabled={props.disabled === true}
           style={props.style}
           onBlur={(e: any) => {
@@ -273,7 +273,7 @@ class FormComponents extends React.Component<
           {...valueProps}
           defaultValue={props.defaultValue}
           placeholder={props.placeholder || Enum.DEFAULT_PLACEHOLDER}
-          className={styles['view-style']}
+          className={props.className || 'view-style'}
           readOnly={true}
           disabled={props.disabled}
           style={props.style}
@@ -351,7 +351,7 @@ class FormComponents extends React.Component<
           rows={props.rows === undefined ? 4 : props.rows}
           value={props.value}
           placeholder={props.placeholder || Enum.DEFAULT_PLACEHOLDER}
-          className={classnames(styles['view-style'], props.viewStyle)}
+          className={classnames('view-style', props.viewStyle)}
           disabled={props.disabled === true}
           style={props.style}
           maxLength={props.maxLength || 255}
@@ -371,7 +371,7 @@ class FormComponents extends React.Component<
           defaultValue={props.defaultValue}
           placeholder={props.placeholder || Enum.DEFAULT_PLACEHOLDER}
           onSearch={props.onSearch}
-          className={styles['view-style']}
+          className={props.className || 'view-style'}
           enterButton
           onClick={props.onClick}
           readOnly={props.readOnly}
@@ -408,7 +408,7 @@ class FormComponents extends React.Component<
           onChange={props.onChange}
           filterOption={props.filterOption}
           style={props.style}
-          className={props.className || styles['view-style']}
+          className={props.className || 'view-style'}
           placeholder={this.props.placeholder || Enum.DEFAULT_PLACEHOLDER}
           dropdownMatchSelectWidth={
             props.dropdownMatchSelectWidth === undefined
@@ -425,7 +425,7 @@ class FormComponents extends React.Component<
     if (props.type === 'dataPicker') {
       renderController = (
         <DatePicker
-          className={styles['view-style']}
+          className={props.className || 'view-style'}
           defaultValue={props.defaultValue}
           format={props.format || 'YYYY/MM/DD'}
           showTime
@@ -528,7 +528,7 @@ class FormComponents extends React.Component<
           disabled={props.disabled === true || props.disabled === 'true'}
           value={props.value}
           defaultValue={props.defaultValue}
-          className={props.className || styles['view-style']}
+          className={props.className || 'view-style'}
           style={props.style}
           onChange={props.onChange}
           dropdownMatchSelectWidth={

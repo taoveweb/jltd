@@ -1,7 +1,7 @@
-import '../../style/index.less';
-import './index.less';
+import 'antd/lib/style/index.less';
+import 'antd/lib/list/style/index.less';
 
 // style dependencies
-import '../../spin/style';
-import '../../pagination/style';
-import '../../grid/style';
+import 'antd/lib/spin/style';
+import 'antd/lib/pagination/style';
+import 'antd/lib/grid/style';

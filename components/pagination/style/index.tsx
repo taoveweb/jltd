@@ -1,6 +1,6 @@
-import '../../style/index.less';
-import './index.less';
+import 'antd/lib/style/index.less';
+import 'antd/lib/pagination/style/index.less';
 
 // style dependencies
-import '../../select/style';
-import '../../input/style';
+import 'antd/lib/select/style';
+import 'antd/lib/input/style';

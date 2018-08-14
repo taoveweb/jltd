@@ -1,8 +1,8 @@
 ---
-title:
-  en-US: HeaderSearch
-  zh-CN: HeaderSearch
+title: HeaderSearch
 subtitle: 顶部搜索框
+category: Components
+type: ant-pro
 cols: 1
 order: 8
 ---
