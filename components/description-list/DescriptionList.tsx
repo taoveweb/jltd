@@ -30,5 +30,4 @@ const DescriptionList = ({
     </div>
   );
 };
-
 export default DescriptionList;

@@ -1,15 +1,11 @@
 import * as React from 'react';
 import update from 'immutability-helper';
 import { DatePicker, Table, Input, Popconfirm, Icon } from 'antd';
+
 const moment = require('moment');
 const styles = require('./style/index.less');
 
-const EditableCell = (arr: {
-  editable: any;
-  value: any;
-  onChange: any;
-  datable: any;
-}) => {
+const EditableCell = (arr: { editable: any; value: any; onChange: any; datable: any }) => {
   return (
     <div>
       {arr.editable ? (
@@ -56,11 +52,9 @@ interface TableComponents {
   onEdit: any;
   onAdd: any;
 }
-class TableComponents extends React.Component<
-  TableComponents,
-  TableComponentsState
-> {
+class TableComponents extends React.Component<TableComponents, TableComponentsState> {
   private columns: any;
+
   private cacheData: any;
 
   constructor(props: TableComponents) {
@@ -69,24 +63,19 @@ class TableComponents extends React.Component<
       return column.isRenderColumn
         ? column
         : update(column, {
-            $merge: {
-              render: (text: any, record: any) => {
-                const textTemp = column.valueChange
-                  ? column.valueChange(text)
-                  : text;
-                return this.renderColumns(textTemp, record, column.dataIndex);
-              },
+          $merge: {
+            render: (text: any, record: any) => {
+              const textTemp = column.valueChange ? column.valueChange(text) : text;
+              return this.renderColumns(textTemp, record, column.dataIndex);
             },
-          });
+          },
+        });
     });
     const { isEditable, isDeleteable, isAddable, isSave, isCancel } = props;
     if (isEditable || isDeleteable || isAddable) {
       const renderSave = (index: number) => {
         return (
-          <a
-            onClick={() => this.save(index)}
-            style={{ fontSize: '14px', color: '#595959' }}
-          >
+          <a onClick={() => this.save(index)} style={{ fontSize: '14px', color: '#595959' }}>
             {isSave ? '保存' : <Icon type="save" />}
           </a>
         );
@@ -96,10 +85,7 @@ class TableComponents extends React.Component<
           return;
         }
         return (
-          <Popconfirm
-            title="真的要取消吗?"
-            onConfirm={() => this.cancel(index)}
-          >
+          <Popconfirm title="真的要取消吗?" onConfirm={() => this.cancel(index)}>
             <a style={{ fontSize: '14px', color: '#595959' }}>
               {isCancel ? '取消' : <Icon type="close" />}
             </a>
@@ -112,9 +98,8 @@ class TableComponents extends React.Component<
         width: 100,
         fixed: 'right',
         align: 'center',
-        render: (text: any, record: any, index: any) => {
+        render: (_text: any, record: any, index: any) => {
           const { editable } = record;
-          console.log(text);
           return (
             <div className="editable-row-operations">
               {editable ? (
@@ -126,10 +111,7 @@ class TableComponents extends React.Component<
               ) : (
                 <span>
                   {isEditable && (
-                    <a
-                      className={styles['icon-style']}
-                      onClick={() => this.edit(index)}
-                    >
+                    <a className={styles['icon-style']} onClick={() => this.edit(index)}>
                       <Icon type="edit" />
                     </a>
                   )}
@@ -146,19 +128,14 @@ class TableComponents extends React.Component<
       });
     }
     this.state = {
-      tableDataSource: this.getTableDataSource(
-        props.tableData,
-        props.isAddable
-      ),
+      tableDataSource: this.getTableDataSource(props.tableData, props.isAddable),
     };
     this.cacheData = props.tableData.map((item: any) => ({ ...item }));
   }
+
   componentWillReceiveProps(nextProps: TableComponents) {
     if (nextProps.tableData && nextProps.tableData !== this.props.tableData) {
-      const tableDataSource = this.getTableDataSource(
-        nextProps.tableData,
-        nextProps.isAddable
-      );
+      const tableDataSource = this.getTableDataSource(nextProps.tableData, nextProps.isAddable);
       this.cacheData = nextProps.tableData.map((item: any) => ({ ...item }));
       // tableDataSource = tableDataSource.map((info, index) => {
       //   return update(info, {
@@ -173,12 +150,14 @@ class TableComponents extends React.Component<
       );
     }
   }
+
   onSelectChange = (selectedRowKeys: any, selectedRows: any) => {
     const { onSelect } = this.props;
     if (onSelect) {
       onSelect(selectedRowKeys, selectedRows);
     }
   };
+
   getTableDataSource(tableData = [], isAddable = false) {
     let tableDataSource: any = tableData;
     if (isAddable) {
@@ -188,6 +167,7 @@ class TableComponents extends React.Component<
     }
     return tableDataSource;
   }
+
   getLastTableDataMap = (key: any) => {
     // 初始化table最后一行空数据
     const { tableData } = this.props;
@@ -202,6 +182,7 @@ class TableComponents extends React.Component<
     tableDataMap.isLast = true;
     return tableDataMap;
   };
+
   handleChange = (value: any, record: any, column: any) => {
     const newData = [...this.state.tableDataSource];
     const target = newData.filter(item => record.key === item.key)[0];
@@ -210,6 +191,7 @@ class TableComponents extends React.Component<
       this.setState({ tableDataSource: newData });
     }
   };
+
   delete(index: any) {
     /* const tableDataSource = update(this.state.tableDataSource, {
           $splice: [[index, 1]],
@@ -222,6 +204,7 @@ class TableComponents extends React.Component<
       }
     });
   }
+
   edit(index: any) {
     const target = update(this.state.tableDataSource[index], {
       $merge: { editable: true },
@@ -231,6 +214,7 @@ class TableComponents extends React.Component<
     });
     this.setState({ tableDataSource });
   }
+
   save(index: any) {
     const newData = [...this.state.tableDataSource];
     const target = update(this.state.tableDataSource[index], {
@@ -250,6 +234,7 @@ class TableComponents extends React.Component<
       this.cacheData = newData.map(item => ({ ...item }));
     }
   }
+
   add(key: any) {
     const { tableDataSource } = this.state;
     const newData = [...this.state.tableDataSource];
@@ -266,12 +251,14 @@ class TableComponents extends React.Component<
       this.cacheData = newData.map(item => ({ ...item }));
     }
   }
+
   cancel(index: any) {
     const tableDataSource: any = update(this.state.tableDataSource, {
       $splice: [[index, 1, this.cacheData[index]]],
     });
     this.setState({ tableDataSource });
   }
+
   renderColumns = (text: any, record: any, column: any) => {
     return (
       <EditableCell

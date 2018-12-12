@@ -1,28 +1,28 @@
 /* @remove-on-es-build-begin */
-// this file is not used if use https://github.com/ant-design/babel-plugin-import 
-const ENV = process.env.NODE_ENV;
-if (
-  ENV !== 'production' &&
-  ENV !== 'test' &&
-  typeof console !== 'undefined' &&
-  console.warn &&
-  typeof window !== 'undefined'
-) {
-  console.warn(
-    'You are using a whole package of antd, ' +
-      'please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.'
-  );
-}
-/* @remove-on-es-build-end */
+// this file is not used if use https://github.com/ant-design/babel-plugin-import
+// const ENV = process.env.NODE_ENV;
+// if (
+//   ENV !== 'production'
+//   && ENV !== 'test'
+//   && typeof console !== 'undefined'
+//   && console.warn
+//   && typeof window !== 'undefined'
+// ) {
+//   console.warn(
+//     'You are using a whole package of antd, '
+//       + 'please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.'
+//   );
+// }
+// /* @remove-on-es-build-end */
 
-if (ENV === 'production') {
-  //export { default as SiderMenu } from './sider-menu'; //ReactRouterDOM
-  //export { default as GlobalHeader } from './global-header';
-}
+// if (ENV === 'production') {
+//   // export { default as SiderMenu } from './sider-menu'; //ReactRouterDOM
+//   // export { default as GlobalHeader } from './global-header';
+// }
 
 export { default as SiderMenu } from './sider-menu';
 export { default as GlobalHeader } from './global-header';
-export { default as ButtonGroup } from './button-group';
+export { default as buttonGroup } from './button-group';
 export { default as RenderAuthorized } from './render-authorized';
 
 export { default as RowEditComponents } from './row-edit-components';
@@ -35,9 +35,7 @@ export { default as EditableCell } from './editable-cell';
 export { default as EditTableForm } from './edit-table-form';
 export { default as TableComponents } from './table-components';
 export { default as SelectComponents } from './select-components';
-export {
-  default as ExceptionModalComponent,
-} from './exception-modal-components';
+export { default as ExceptionModalComponent } from './exception-modal-components';
 export { default as ModalComponent } from './modal-component';
 export { default as StandardTable } from './standard-table';
 export { default as TagSelect } from './tag-select';
@@ -52,12 +50,14 @@ export { default as Login } from './login';
 export { default as HeaderSearch } from './header-search';
 export { default as Exception } from './exception';
 export { default as Ellipsis } from './ellipsis';
-export { default as EditableLinkGroup } from './editable-link-group'; 
- export { default as EditableItem } from './editable-item';
+export { default as EditableLinkGroup } from './editable-link-group';
+export { default as EditableItem } from './editable-item';
 export { default as DescriptionList } from './description-list';
 export { default as CountDown } from './count-down';
 export { default as AvatarList } from './avatar-list';
-export { default as FooterToolbar } from './footer-toolbar';  
+export { default as FooterToolbar } from './footer-toolbar';
+// export { default as FineReport } from './fine-report';
+export { default as ImportTemplate } from './import-template';
 
 export { default as Icon } from './icon';
 export { default as Layout } from './layout';
@@ -116,3 +116,4 @@ export { default as Divider } from './divider';
 export { default as Col } from './col';
 export { default as Row } from './row';
 export { default as LocaleProvider } from './locale-provider';
+export { default as BasicLayout } from './basic-layout';

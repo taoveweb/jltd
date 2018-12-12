@@ -3,22 +3,23 @@ import {Form, Modal,Row, Col, Table, Input,message} from 'antd';
 const FormItem = Form.Item;
 const styles = require('./style/index.less');
 import buttonGroup from '../button-group';
-import Common from '../_util/common';
 import EmptyUtils from '../_util/emptyUtils';
 import update from 'immutability-helper';
 export interface ModalSearchComponentControllerProps {
   visible:boolean,
   onCancel:(e?:any)=>void, 
   onChangeVisible:Function, 
+  queryList:Function,
+  dataSource:any,
   columns:any,
   moadlObject:any,
-  searchParam:any
+  //searchParam:any
   modalTitle:String,
-  dispatch?:any,
-  url:String,
-  hiddenField?:any,
+  //dispatch?:any,
+  //url:String,
+  //hiddenField?:any,
   type?:String,
-  async?:boolean,
+  //async?:boolean,
   form:any
 }
 export interface ModalSearchComponentControllerState {
@@ -45,7 +46,7 @@ class ModalSearchComponent extends React.Component<ModalSearchComponentControlle
       
       if(nextProps.visible!=this.props.visible){
         // debugger
-        this.queryCategoryList();
+        //this.queryCategoryList();
         this.setState({
           selectedRowKeys:[],
           selectCategoryRow:[],
@@ -195,72 +196,8 @@ class ModalSearchComponent extends React.Component<ModalSearchComponentControlle
       })
     }
     queryCategoryList = () => {
-      if(this.props.async){
-        this.setState({ selectOwnerRow: [], ownerRecord: [] });
-        const balanceForm = this.props.form;
-        const balanceFormItem = balanceForm.getFieldsValue();
-        let hiddenField = null;
-        if(this.props.hiddenField){
-          hiddenField = this.props.hiddenField;
-        }
-        // debugger
-        this.props
-          .dispatch({
-            type: this.props.url,
-            payload: {...balanceFormItem,...hiddenField},
-          }).then((response:any) => {
-            if (response.data) {
-              this.setState({ categoryDataSource: response.data });
-            }
-            this.setState({
-              categoryCurrent: 1
-            });
-          })
-      }else{
-        this.setState({ selectCategoryRow: [], selectedRowKeys: [] });
-        const categoryForm = this.props.form;
-        const balanceFormItem = categoryForm.getFieldsValue();
-        const param = Common.defaultPageParam();       
-        this.props.searchParam.map((searchParam:any)=>{
-          const { name,value } = searchParam;
-          param.push({
-             name,
-             value:balanceFormItem[value]
-          })
-        })
-        if(this.props.hiddenField){
-          this.props.hiddenField.map((hiddenField:any)=>{
-            const { name,value } = hiddenField;
-            param.push({
-               name,
-               value:value
-            })
-          })
-        }
-        const _this = this;
-        let url:any =this.props.url
-        $.ajax({
-          url: url,
-          data: param,
-          cache: false,
-          async: false,
-          type: 'POST',
-          dataType: 'json',
-          success: function (data) {
-            if (data) {
-              _this.setState({
-                categoryDataSource: data,
-                categoryCurrent: 1
-              });
-            }
-            
-          },
-    
-          error: function () {
-    
-          }
-        })
-      }
+      const { queryList } = this.props;
+      queryList(this.props.form.getFieldsValue());
     }
     render() {
       const { 
@@ -318,8 +255,8 @@ class ModalSearchComponent extends React.Component<ModalSearchComponentControlle
           </Row>
           <Table 
             rowSelection={rowSelect} 
-            rowKey={record => record.id} 
-            dataSource={this.state.categoryDataSource} 
+            rowKey={(record:any) => record.id} 
+            dataSource={this.props.dataSource} 
             bordered 
             columns={this.props.columns} 
             pagination={pagination}

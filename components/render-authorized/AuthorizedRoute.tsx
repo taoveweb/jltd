@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom';
 //import { Route, Redirect } from 'react-router';
 import Authorized from './Authorized';
 
-console.log()
 class AuthorizedRoute extends React.Component {
   render() {
     const { component: Component, render, authority, redirectPath, ...rest }:any = this.props;

@@ -39,10 +39,10 @@ const initColumns = (listCode:any, self:any) => {
 	var data = dataList;
 	var columns:any = [];
 	$.each(data, (i, item) => {
-		console.log(i);
 		var column:any = {
 			dataIndex : item.dataIndex,
-			title : item.title
+			title : item.title,
+			i
 		};
 		if (item.extAttr) {
 			var extAttr = $.parseJSON(item.extAttr);

@@ -20,13 +20,11 @@ title: ModalSearchCompontne
 | onCancel | 取消模态框的回调函数 | Function() | - |
 | onChangeVisible | 点击确定时，数据回填的回调函数 | Function(selectedRows:any) | - |
 | columns | 数据数组 | any[] | - |
-| searchParam | 查询条件数组| any[] | - |
+| dataSource | 点击搜索时返回的数据| any[] | - |
 | modalTitle | 模态框标题 | string | - |
 | dispatch | 异步时用于触发reducer的函数 | Function() | - |
-| url | 用于查询条件的url | string | - |
-| hiddenField | 隐藏域字段 | any | - |
 | type | 多选/单选，checkbox or radio | string | radio |
-| async | 异步dispatch(action)/同步$.ajax() | boolean | false |
+| queryList | 点击搜索按钮时触发的回调函数 | Function | - |
 ```jsx
 <ModalSearchCompontne>
   ...

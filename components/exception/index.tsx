@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import * as React from 'react';
 import classNames from 'classnames';
 import { Button } from 'antd';
-const config = require('./typeConfig').default;
+import config  from './typeConfig';
 
 const Exception = ({
   className,

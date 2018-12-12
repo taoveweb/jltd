@@ -11,12 +11,12 @@ import {
   Cascader,
 } from 'antd';
 import classnames from 'classnames';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import RanderRange from './RanderRange';
 // const styles = require('./style/index.less');
 import DataDictionaryComponents from '../DataDictionaryComponents';
 import Enum from '../_util/enum';
-
+const moment =require("moment");
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const RadioGroup = Radio.Group;
@@ -299,6 +299,8 @@ const LabelWithController = (props: LabelWithControllerProps) => {
           props.onChange &&
             props.onChange(dateStrings[0], dateStrings[1], moments);
         }}
+        format={props.format ? props.format : 'YYYY-MM-DD HH:mm:ss'}
+        showTime={props.showTime != true}
         placeholder={props.placeholder}
       />
     );
@@ -415,3 +417,4 @@ const LabelWithController = (props: LabelWithControllerProps) => {
 };
 
 export default LabelWithController;
+export { RanderRange };

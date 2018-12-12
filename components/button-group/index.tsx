@@ -1,27 +1,25 @@
-//importExcel --引用太深了
+// importExcel --引用太深了
 import * as React from 'react';
 import { Button, Popconfirm, Dropdown, Menu, Icon } from 'antd';
 import classnames from 'classnames';
 import { connect } from 'dva';
 import buttonPermission from './buttonPermission';
-import ImportExcel from './importExcel';  //外引用组件
-import operationButtonGroup from "./operationButtonGroup"
+import ImportExcel from './importExcel'; // 外引用组件
+import operationButtonGroup from './operationButtonGroup';
+
 const { SubMenu } = Menu;
 const renderButton: any = (buttonInfo: any) => {
   let disabled = buttonInfo.disabled;
   if ((buttonInfo.loading || buttonInfo.text === '保存') && buttonInfo.load) {
     disabled = true;
   }
-  return buttonInfo.templateId ? <ImportExcel buttonInfo={buttonInfo} /> : (
+  return buttonInfo.templateId ? (
+    <ImportExcel buttonInfo={buttonInfo} />
+  ) : (
     <Button
       className={classnames('button-group', buttonInfo.className)}
       type={buttonInfo.type || 'default'}
       size={buttonInfo.size || 'default'}
-      /* loading={
-      buttonInfo.loading || buttonInfo.text === "保存"
-        ? buttonInfo.load
-        : false
-    } */
       onClick={buttonInfo.onClick}
       disabled={disabled}
     >
@@ -30,7 +28,9 @@ const renderButton: any = (buttonInfo: any) => {
   );
 };
 const renderMenuItem = (buttonInfo: any) => {
-  return buttonInfo.templateId ? <ImportExcel buttonInfo={buttonInfo} buttonType="a" /> : (
+  return buttonInfo.templateId ? (
+    <ImportExcel buttonInfo={buttonInfo} buttonType="a" />
+  ) : (
     <a onClick={buttonInfo.onClick}>{buttonInfo.text}</a>
   );
 };
@@ -48,7 +48,7 @@ const renderDropdown = (buttonInfo: any) => {
   );
   return (
     <Dropdown overlay={menu}>
-      <Button className={'button-group'}>
+      <Button className="button-group">
         {buttonInfo.text} <Icon type="down" />
       </Button>
     </Dropdown>
@@ -129,7 +129,7 @@ const buttonGroup: any = (buttonOptList: Array<any> = []) => {
   if (dropdownBtnOptList.length > 0) {
     buttonList.push(
       <Dropdown overlay={menu}>
-        <Button className={'button-group'}>
+        <Button className="button-group">
           更多 <Icon type="down" />
         </Button>
       </Dropdown>
@@ -145,8 +145,8 @@ interface GlobalButtonProps {
 }
 class GlobalButton extends React.PureComponent<GlobalButtonProps, {}> {
   componentDidMount() {
-    console.log(this.props, 'this.props');
   }
+
   render() {
     return renderButton({
       ...this.props.buttonInfo,
@@ -159,6 +159,6 @@ const NewGlobalBotton = connect(({ global }: { global: any }) => ({
   load: global.load,
 }))(GlobalButton);
 
-buttonGroup.operationButtonGroup=operationButtonGroup;
+buttonGroup.operationButtonGroup = operationButtonGroup;
 buttonGroup.renderButton = renderButton;
 export default buttonGroup;

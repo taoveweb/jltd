@@ -36,7 +36,7 @@ class ImportExcel extends React.Component<IImportExcelProps,any> {
 
     this.props.dispatch(
       routerRedux.push({
-        pathname: '/mdm/importTemplate',
+        pathname: '../importTemplate',
         search: queryString.stringify({
           templateId,
           importBatchNum,

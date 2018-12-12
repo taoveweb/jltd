@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Form, Input, Select, DatePicker, Checkbox, Radio } from 'antd';
 import classnames from 'classnames';
 import * as moment from 'moment';
+
 const styles = require('./style/index.less');
 
 // import DataDictionaryComponents from '../../DataDictionaryComponents';
@@ -29,7 +30,7 @@ export interface EditableCellProps {
   dropdownMatchSelectWidth?: any;
   disabled?: boolean | string;
   onBlur?: (e?: any) => void;
-  onChange: (e?: any, b?: any) => void | any;
+  onChange: (e?: any, b?: any, c?: any) => void | any;
   onClick?: (e?: any) => void;
   maxLength?: number;
   type?: string;
@@ -42,6 +43,7 @@ export interface EditableCellProps {
 
 class EditableCell extends React.Component<EditableCellProps> {
   private fieldOption: any;
+
   constructor(props: EditableCellProps) {
     super(props);
     this.state = {
@@ -50,11 +52,13 @@ class EditableCell extends React.Component<EditableCellProps> {
     };
     this.fieldOption = {};
   }
+
   componentDidMount() {
     if (this.props.getEditRowFormRef != null) {
       this.props.getEditRowFormRef(this.props.form);
     }
   }
+
   componentWillReceiveProps(nextPorps: EditableCellProps) {
     if (nextPorps.fieldOption == null) {
       this.fieldOption = { initialValue: nextPorps.value };
@@ -63,6 +67,7 @@ class EditableCell extends React.Component<EditableCellProps> {
       this.fieldOption.initialValue = nextPorps.value;
     }
   }
+
   /**
    * 创建FormItem
    * formItemProps: FormItem的属性
@@ -80,15 +85,14 @@ class EditableCell extends React.Component<EditableCellProps> {
     return (
       <div>
         {editable ? (
-          <FormItem>
-            {getFieldDecorator(fieldId == null ? '' : fieldId, options)(field)}
-          </FormItem>
+          <FormItem>{getFieldDecorator(fieldId == null ? '' : fieldId, options)(field)}</FormItem>
         ) : (
           <span>{value == null ? '' : value}</span>
         )}
       </div>
     );
   };
+
   createHiddenInput = (field: any) => {
     const { fieldId, editable, value, form } = this.props;
     const { getFieldDecorator } = form;
@@ -97,10 +101,7 @@ class EditableCell extends React.Component<EditableCellProps> {
       <div>
         {editable ? (
           <FormItem>
-            {getFieldDecorator(
-              fieldId == null ? '' : fieldId,
-              this.fieldOption
-            )(field)}
+            {getFieldDecorator(fieldId == null ? '' : fieldId, this.fieldOption)(field)}
           </FormItem>
         ) : (
           <span>{value == null ? '' : value}</span>
@@ -108,16 +109,17 @@ class EditableCell extends React.Component<EditableCellProps> {
       </div>
     );
   };
+
   convertFormInfo = () => {
     let field;
     if (this.props.type === 'hidden') {
-      field =
-        this.props.field == null ? <Input type="hidden" /> : this.props.field;
+      field = this.props.field == null ? <Input type="hidden" /> : this.props.field;
       return this.createHiddenInput(field);
     }
     field = this.props.field == null ? this.editComponents() : this.props.field;
     return this.createFormItem(field);
   };
+
   editComponents = () => {
     switch (this.props.type) {
       case 'input':
@@ -200,9 +202,7 @@ class EditableCell extends React.Component<EditableCellProps> {
             style={style || { width: 170 }}
             className={className || styles['view-style']}
             dropdownMatchSelectWidth={
-              dropdownMatchSelectWidth === undefined
-                ? true
-                : dropdownMatchSelectWidth
+              dropdownMatchSelectWidth === undefined ? true : dropdownMatchSelectWidth
             }
             placeholder={placeholder}
           >
@@ -214,11 +214,10 @@ class EditableCell extends React.Component<EditableCellProps> {
           <DatePicker
             className={styles['view-style']}
             defaultValue={this.props.defaultValue}
-            format={'YYYY/MM/DD'}
+            format="YYYY/MM/DD"
             onChange={(moments, dateStrings) => {
-              console.log(moments);
               if (this.props.onChange) {
-                this.props.onChange(dateStrings);
+                this.props.onChange(dateStrings, moments);
               }
             }}
             value={moment(this.props.value)}
@@ -228,30 +227,19 @@ class EditableCell extends React.Component<EditableCellProps> {
         return (
           <RangePicker
             value={
-              this.props.DateBegin
-                ? [moment(this.props.DateBegin), moment(this.props.DateEnd)]
-                : []
+              this.props.DateBegin ? [moment(this.props.DateBegin), moment(this.props.DateEnd)] : []
             }
             onChange={(moments, dateStrings) => {
-              console.log(moments);
               if (this.props.onChange) {
-                this.props.onChange(dateStrings[0], dateStrings[1]);
+                this.props.onChange(dateStrings[0], dateStrings[1], moments);
               }
             }}
           />
         );
       case 'checkbox':
         return (
-          <div
-            className={classnames(
-              styles['view-style'],
-              styles['checkbox-style']
-            )}
-          >
-            <Checkbox
-              defaultChecked={this.props.defaultValue}
-              onChange={this.props.onChange}
-            />
+          <div className={classnames(styles['view-style'], styles['checkbox-style'])}>
+            <Checkbox defaultChecked={this.props.defaultValue} onChange={this.props.onChange} />
           </div>
         );
       case 'radioGroup':
@@ -263,12 +251,7 @@ class EditableCell extends React.Component<EditableCellProps> {
           );
         });
         return (
-          <div
-            className={classnames(
-              styles['view-style'],
-              styles['radio-group-style']
-            )}
-          >
+          <div className={classnames(styles['view-style'], styles['radio-group-style'])}>
             <RadioGroup
               onChange={e => {
                 this.props.onChange(e.target.value);
@@ -283,6 +266,7 @@ class EditableCell extends React.Component<EditableCellProps> {
         break;
     }
   };
+
   render() {
     return <div>{this.convertFormInfo()}</div>;
   }

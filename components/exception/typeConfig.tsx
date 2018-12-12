@@ -1,4 +1,4 @@
-const config = {
+const config:any = {
   403: {
     img: 'https://gw.alipayobjects.com/zos/rmsportal/wZcnGqRDyhPOEYFcZDnb.svg',
     title: '403',

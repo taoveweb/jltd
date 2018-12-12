@@ -1,11 +1,10 @@
-import url from '../_util/url';
 import * as $ from 'jquery';
 let permissionMap: any = null;
 const getPermissionMap = () => {
   permissionMap = {};
   /* eslint-disable react/no-namespace */
   $.ajax({
-    url: url.nav.getButtonPermission(),
+    url: '/system/getButtonPermission',
     data: {},
     cache: false,
     async: false,

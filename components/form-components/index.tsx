@@ -42,7 +42,7 @@ export interface FormComponentsProps {
     isRequire?: boolean; // 是否显示必填星号提示
     type: string; // 类型
     onChange: Function; // 状态变化方法
-    value?: string; // 外部修改输入框的值
+    value?: any; // 外部修改输入框的值
     codeType?: string; // 数据字典选择框的类型
     defaultValue?: string; // 默认值
     className?: string; // 样式修改
@@ -218,7 +218,11 @@ class FormComponents extends React.Component<
     }
     return value;
   };
-
+  onBlur(props:any) {
+    if (props.value == '') {
+      this.props.form.setFields({ [props.fileId]: props.fieldOption });
+    }
+  }
   editComponents = (props: any) => {
     let renderController = null;
     // 输入框
@@ -237,18 +241,8 @@ class FormComponents extends React.Component<
           className={props.className || 'view-style'}
           disabled={props.disabled === true}
           style={props.style}
-          onBlur={(e: any) => {
-            if (props.fileId) {
-              let value = e.target.value;
-              this.props.form.setFieldsValue({ [props.fileId]: value.trim() });
-            }
-
-            if (props.onBlur) {
-              props.onBlur(e.target.value);
-            }
-          }}
+          onBlur={this.onBlur.bind(this,this.props)}
           onChange={(e: any) => {
-            console.log('change');
             if (props.onChange) {
               props.onChange(e.target.value);
             }
@@ -434,7 +428,22 @@ class FormComponents extends React.Component<
               props.onChange(dateStrings, moments);
             }
           }}
-          value={props.value ? moment(props.value) : moment()}
+          value={props.value || ''}
+        />
+      );
+    }
+    if (props.type === "dataFormatPicker") {
+      renderController = (
+        <DatePicker
+          className={props.className || 'view-style'}
+          defaultValue={props.defaultValue}
+          format={props.format || "YYYY/MM/DD"}
+          onChange={(dateStrings) => {
+            if (props.onChange) {
+              props.onChange(dateStrings);
+            }
+          }}
+          value={props.value || ''}
         />
       );
     }

@@ -1,8 +1,10 @@
+import { Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
-import { Layout, Menu, Icon } from 'antd';
-const pathToRegexp = require('path-to-regexp');
 import { Link } from 'react-router-dom';
 import { urlToList } from '../_util/pathTools';
+
+const pathToRegexp = require('path-to-regexp');
+
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 const preCls = 'ant-sidermenu';
@@ -13,13 +15,7 @@ const preCls = 'ant-sidermenu';
 const getIcon = (icon: any) => {
   if (typeof icon === 'string') {
     if (icon.indexOf('http') === 0) {
-      return (
-        <img
-          src={icon}
-          alt="icon"
-          className={`${preCls}-icon sider-menu-item-img`}
-        />
-      );
+      return <img src={icon} alt="icon" className={`${preCls}-icon sider-menu-item-img`} />;
     }
     return <Icon type={icon} />;
   }
@@ -30,27 +26,22 @@ const getIcon = (icon: any) => {
  * [{path:string},{path:string}] => [path,path2]
  * @param  menu
  */
-export const getFlatMenuKeys = (menu: any) =>
-  menu.reduce((keys: any, item: any) => {
-    keys.push(item.path);
-    if (item.children) {
-      return keys.concat(getFlatMenuKeys(item.children));
-    }
-    return keys;
-  }, []);
+export const getFlatMenuKeys = (menu: any) => menu.reduce((keys: any, item: any) => {
+  keys.push(item.path);
+  if (item.children) {
+    return keys.concat(getFlatMenuKeys(item.children));
+  }
+  return keys;
+}, []);
 /**
  * Find all matched menu keys based on paths
  * @param  flatMenuKeys: [/abc, /abc/:id, /abc/:id/info]
  * @param  paths: [/abc, /abc/11, /abc/11/info]
  */
-export const getMenuMatchKeys = (flatMenuKeys: any, paths: any) =>
-  paths.reduce(
-    (matchKeys: any, path: any) =>
-      matchKeys.concat(
-        flatMenuKeys.filter((item: any) => pathToRegexp(item).test(path))
-      ),
-    []
-  );
+export const getMenuMatchKeys = (flatMenuKeys: any, paths: any) => paths.reduce(
+  (matchKeys: any, path: any) => matchKeys.concat(flatMenuKeys.filter((item: any) => pathToRegexp(item).test(path))),
+  []
+);
 type SiderMenuState = {
   openKeys: any;
 };
@@ -64,6 +55,7 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
   }
+
   componentWillReceiveProps(nextProps: any) {
     const { location }: any = this.props;
     if (nextProps.location.pathname !== location.pathname) {
@@ -72,6 +64,7 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
       });
     }
   }
+
   /**
    * Convert pathname to openKeys
    * /list/search/articles = > ['list','/list/search']
@@ -80,10 +73,10 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
   getDefaultCollapsedSubMenus(props: any) {
     const {
       location: { pathname },
-    } =
-      props || this.props;
+    } = props || this.props;
     return getMenuMatchKeys(this.flatMenuKeys, urlToList(pathname));
   }
+
   /**
    * 判断是否是http链接.返回 Link 或 a
    * Judge whether it is http link.return a or Link
@@ -111,8 +104,8 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
         onClick={
           isMobile
             ? () => {
-                onCollapse(true);
-              }
+              onCollapse(true);
+            }
             : undefined
         }
       >
@@ -121,6 +114,7 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
       </Link>
     );
   };
+
   /**
    * get SubMenu or Item
    */
@@ -148,12 +142,10 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
         );
       }
       return null;
-    } else {
-      return (
-        <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>
-      );
     }
+    return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
   };
+
   /**
    * 获得菜单子节点
    * @memberof SiderMenu
@@ -171,6 +163,7 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
       })
       .filter((item: any) => item);
   };
+
   // Get the currently selected menu
   getSelectedMenuKeys = () => {
     const {
@@ -178,15 +171,16 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
     }: any = this.props;
     return getMenuMatchKeys(this.flatMenuKeys, urlToList(pathname));
   };
+
   // conversion Path
   // 转化路径
   conversionPath = (path: any) => {
     if (path && path.indexOf('http') === 0) {
       return path;
-    } else {
-      return `/${path || ''}`.replace(/\/+/g, '/');
     }
+    return `/${path || ''}`.replace(/\/+/g, '/');
   };
+
   // permission to check
   checkPermissionItem = (authority: any, ItemDom: any) => {
     const { Authorized }: any = this.props;
@@ -196,29 +190,34 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
     }
     return ItemDom;
   };
+
   isMainMenu = (key: any) => {
     const { menuData }: any = this.props;
-    return menuData.some(
-      (item: any) => key && (item.key === key || item.path === key)
-    );
+    return menuData.some((item: any) => key && (item.key === key || item.path === key));
   };
+
   handleOpenChange = (openKeys: any) => {
     const lastOpenKey = openKeys[openKeys.length - 1];
-    const moreThanOne =
-      openKeys.filter((openKey: any) => this.isMainMenu(openKey)).length > 1;
+    const moreThanOne = openKeys.filter((openKey: any) => this.isMainMenu(openKey)).length > 1;
     this.setState({
       openKeys: moreThanOne ? [lastOpenKey] : [...openKeys],
     });
   };
+
+  toggle = () => {
+    const { collapsed, onCollapse }: any = this.props;
+    onCollapse(!collapsed);
+  };
+
   render() {
-    const { logo, menuData, collapsed, onCollapse }: any = this.props;
+    const { menuData, collapsed, onCollapse }: any = this.props;
     const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed
       ? {}
       : {
-          openKeys,
-        };
+        openKeys,
+      };
     // if pathname can't match, use the nearest parent's key
     let selectedKeys = this.getSelectedMenuKeys();
     if (!selectedKeys.length) {
@@ -226,23 +225,22 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
     }
     return (
       <Sider
-        trigger={null}
         collapsible
         collapsed={collapsed}
         breakpoint="lg"
         onCollapse={onCollapse}
-        width={256}
+        width={212}
         className={`${preCls}-sider`}
       >
-        <div className={`${preCls}-logo`} key="logo">
+        {/* <div className={`${preCls}-logo`} key="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
             <h1>Ant Design Pro</h1>
           </Link>
-        </div>
+        </div> */}
         <Menu
           key="Menu"
-          theme="dark"
+          theme="light"
           mode="inline"
           {...menuProps}
           onOpenChange={this.handleOpenChange}
@@ -251,6 +249,13 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
         >
           {this.getNavMenuItems(menuData)}
         </Menu>
+        {/* <div className="ant-layout-sider-toggle">
+          <Icon
+            className="trigger"
+            type={collapsed ? 'menu-unfold' : 'menu-fold'}
+            onClick={this.toggle}
+          />
+        </div> */}
       </Sider>
     );
   }

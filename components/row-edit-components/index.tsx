@@ -200,7 +200,12 @@ class RowEditComponents extends React.Component<
     }
     return value;
   };
-
+  onBlur(props:any) {
+    const fileId = props.fileId.replace(/\d+$/gi, '')
+    if (props.value == '') {
+      this.props.form.setFields({ [fileId]: props.fieldOption });
+    }
+  }
   editComponents = (props: RowEditComponentsProps) => {
     let renderController: any;
     // 输入框
@@ -218,15 +223,7 @@ class RowEditComponents extends React.Component<
           className={styles['view-style']}
           disabled={this.props.disabled === true}
           style={this.props.style}
-          onBlur={e => {
-            if (props.fileId) {
-              const value = e.target.value;
-              this.props.form.setFieldsValue({ [props.fileId]: value.trim() });
-            }
-            if (this.props.onBlur) {
-              this.props.onBlur(e.target.value);
-            }
-          }}
+          onBlur={this.onBlur.bind(this,this.props)}
           onChange={e => {
             if (this.props.onChange) {
               this.props.onChange(e.target.value);

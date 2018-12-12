@@ -1,5 +1,5 @@
-const DescriptionList = require('./DescriptionList').default;
+import DescriptionList from "./DescriptionList";
 import Description from './Description';
 
-DescriptionList.Description = Description;
+(DescriptionList as any).Description = Description;
 export default DescriptionList;

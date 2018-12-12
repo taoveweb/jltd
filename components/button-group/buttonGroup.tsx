@@ -1,18 +1,22 @@
-//importExcel --引用太深了
+// importExcel --引用太深了
 import * as React from 'react';
 import { Button, Popconfirm, Dropdown, Menu, Icon } from 'antd';
 import classnames from 'classnames';
 import { connect } from 'dva';
 import buttonPermission from './buttonPermission';
-//import ImportExcel from '../../routes/impexp/importExcel';  //外引用组件
+import ImportExcel from './importExcel';
+// 外引用组件
 const styles = require('./buttonGroup.less');
+
 const { SubMenu } = Menu;
 const renderButton: any = (buttonInfo: any) => {
   let disabled = buttonInfo.disabled;
   if ((buttonInfo.loading || buttonInfo.text === '保存') && buttonInfo.load) {
     disabled = true;
   }
-  return buttonInfo.templateId ? null /* <ImportExcel buttonInfo={buttonInfo} /> */ : (
+  return buttonInfo.templateId ? (
+    <ImportExcel buttonInfo={buttonInfo} />
+  ) : (
     <Button
       className={classnames(styles['button-group'], buttonInfo.className)}
       type={buttonInfo.type || 'default'}
@@ -30,7 +34,9 @@ const renderButton: any = (buttonInfo: any) => {
   );
 };
 const renderMenuItem = (buttonInfo: any) => {
-  return buttonInfo.templateId ? null /* <ImportExcel buttonInfo={buttonInfo} buttonType="a" /> */ : (
+  return buttonInfo.templateId ? (
+    <ImportExcel buttonInfo={buttonInfo} buttonType="a" />
+  ) : (
     <a onClick={buttonInfo.onClick}>{buttonInfo.text}</a>
   );
 };
@@ -145,8 +151,8 @@ interface GlobalButtonProps {
 }
 class GlobalButton extends React.PureComponent<GlobalButtonProps, {}> {
   componentDidMount() {
-    console.log(this.props, 'this.props');
   }
+
   render() {
     return renderButton({
       ...this.props.buttonInfo,

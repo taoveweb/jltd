@@ -1,5 +1,5 @@
-import 'antd/lib/style/index.less';
-import 'antd/lib/form/style/index.less';
+import 'antd/lib/style';
+import 'antd/lib/form/style';
 
 // style dependencies
 import 'antd/lib/grid/style';

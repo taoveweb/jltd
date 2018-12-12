@@ -4,78 +4,80 @@ import { connect } from 'dva';
 import LabelWithController from '../label-with-controller';
 import ModalComponent from './ModalComponent';
 
-
 // 新建批次
-class CreateImportBatch extends React.Component<any,any> {
-  constructor(props:any) {
+class CreateImportBatch extends React.Component<any, any> {
+  constructor(props: any) {
     super(props);
 
     this.state = {
-		importBatchNum:'',
-		importRemark:'',
+      importBatchNum: '',
+      importRemark: '',
+      visible: props.isCreateBatchModalShow,
     };
   }
-  
-  componentWillReceiveProps(nextPorps:any) {
-    if (this.state.importBatchNum == "" &&
-      nextPorps.isCreateBatchModalShow &&
-      nextPorps.isCreateBatchModalShow !== this.props.isCreateBatchModalShow) {
-      this.props.dispatch({
-        type: 'importBatchInfoList/addImportBatchNum',
-      })
-      .then(() => {
-        this.setState(() => {
-          return {
-            loading: false,
-          };
+
+  componentWillReceiveProps(nextPorps: any) {
+    if (
+      this.state.importBatchNum == ''
+      && nextPorps.isCreateBatchModalShow
+      && nextPorps.isCreateBatchModalShow !== this.props.isCreateBatchModalShow
+    ) {
+      this.setState({ visible: nextPorps.isCreateBatchModalShow });
+      this.props
+        .dispatch({
+          type: 'importBatchInfoList/addImportBatchNum',
+        })
+        .then(() => {
+          this.setState(() => {
+            return {
+              loading: false,
+            };
+          });
         });
+    }
+    if (nextPorps.addImportBatchNum && nextPorps.addImportBatchNum !== this.state.importBatchNum) {
+      this.setState({
+        importBatchNum: nextPorps.addImportBatchNum,
       });
     }
-    if (nextPorps.addImportBatchNum &&
-      nextPorps.addImportBatchNum !== this.state.importBatchNum) {
-    	this.setState({
-        	importBatchNum : nextPorps.addImportBatchNum,
-        });
-      }
   }
-  
-  //导入批次号
+
+  // 导入批次号
   onImportBatchNumChange = () => {
-//    this.setState({
-//    	importBatchNum,
-//    });
+    //    this.setState({
+    //    	importBatchNum,
+    //    });
   };
-  
-  //导入描述
-  onImportRemarkChange = (importRemark:any) => {
+
+  // 导入描述
+  onImportRemarkChange = (importRemark: any) => {
     this.setState({
-    	importRemark,
+      importRemark,
     });
   };
-  
 
   onConfirm = () => {
-    const { importBatchNum,importRemark } = this.state;
-    const { templateId,orderType } = this.props;
+    const { importBatchNum, importRemark } = this.state;
+    const { templateId, orderType } = this.props;
 
     this.props
       .dispatch({
         type: 'importBatchInfoList/add',
         payload: {
-        	importBatchNum,
-        	importRemark,
-        	orderType:orderType,
-        	templateId:templateId,
+          importBatchNum,
+          importRemark,
+          orderType,
+          templateId,
         },
       })
       .then(() => {
-//        if (result.status > 0) {
-          const { onCreateBatchModelOK } = this.props;
-          onCreateBatchModelOK && onCreateBatchModelOK(importBatchNum,templateId);
-//        } else {
-//          // 错误信息在dataFetch里已经展示
-//          // message.error(result.message);
-//        }
+        //        if (result.status > 0) {
+        const { onCreateBatchModelOK } = this.props;
+        onCreateBatchModelOK && onCreateBatchModelOK(importBatchNum, templateId);
+        //        } else {
+        //          // 错误信息在dataFetch里已经展示
+        //          // message.error(result.message);
+        //        }
       });
   };
 
@@ -85,10 +87,7 @@ class CreateImportBatch extends React.Component<any,any> {
   };
 
   renderControllerList = () => {
-    const { 
-    	importBatchNum,
-    	importRemark,
-    	} = this.state;
+    const { importBatchNum, importRemark } = this.state;
     const controllerList = [
       {
         label: '导入批次号',
@@ -98,14 +97,14 @@ class CreateImportBatch extends React.Component<any,any> {
         disabled: true,
       },
       {
-    	  label: '导入描述',
-    	  type: 'textarea',
-    	  onChange: this.onImportRemarkChange,
-    	  value: importRemark,
+        label: '导入描述',
+        type: 'textarea',
+        onChange: this.onImportRemarkChange,
+        value: importRemark,
       },
     ];
 
-    const renderControllerList = controllerList.map((info:any) => {
+    const renderControllerList = controllerList.map((info: any) => {
       return (
         <LabelWithController
           type={info.type}
@@ -121,21 +120,20 @@ class CreateImportBatch extends React.Component<any,any> {
 
     return renderControllerList;
   };
-  
+
   renderImportBatch = () => {
-	  return (
-			<div>
-				<span>导入批次号：</span>
-				<input id={'importBatchNum'}
-		          onChange={this.onImportBatchNumChange} ></input>
-			</div>
-	  );
-  }
+    return (
+      <div>
+        <span>导入批次号：</span>
+        <input id="importBatchNum" onChange={this.onImportBatchNumChange} />
+      </div>
+    );
+  };
 
   render() {
     const child = (
-      <div className={'ant-pro-modal-style'}>
-        <div className={'ant-pro-right-style'}>
+      <div className="ant-pro-modal-style">
+        <div className="ant-pro-right-style">
           <div>{this.renderControllerList()}</div>
         </div>
       </div>
@@ -156,7 +154,7 @@ class CreateImportBatch extends React.Component<any,any> {
   }
 }
 
-function mapStateToProps(state:any) {
+function mapStateToProps(state: any) {
   const { addImportBatchNum } = state.importBatchInfoList;
   return { addImportBatchNum };
 }

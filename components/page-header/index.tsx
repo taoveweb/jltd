@@ -2,7 +2,8 @@
 import { PureComponent, createElement } from 'react';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-const pathToRegexp = require('path-to-regexp').default;
+// @ts-ignore
+import pathToRegexp from 'path-to-regexp';
 import { Breadcrumb, Tabs } from 'antd';
 import classNames from 'classnames';
 import { urlToList } from '../_util/pathTools';
@@ -96,23 +97,19 @@ export default class PageHeader extends PureComponent<IPageHeaderProps, any> {
 
   // Generated according to props
   conversionFromProps = () => {
-    const {
-      breadcrumbList,
-      breadcrumbSeparator,
-      linkElement = 'a',
-    } = this.props;
+    const { breadcrumbList, breadcrumbSeparator, linkElement = 'a' } = this.props;
     return (
-      <Breadcrumb className={'breadcrumb'} separator={breadcrumbSeparator}>
+      <Breadcrumb className="breadcrumb" separator={breadcrumbSeparator}>
         {breadcrumbList.map((item: any) => (
           <Breadcrumb.Item key={item.title}>
             {item.href
               ? createElement(
-                  linkElement,
-                  {
-                    [linkElement === 'a' ? 'href' : 'to']: item.href,
-                  },
-                  item.title
-                )
+                linkElement,
+                {
+                  [linkElement === 'a' ? 'href' : 'to']: item.href,
+                },
+                item.title
+              )
               : item.title}
           </Breadcrumb.Item>
         ))}
@@ -127,8 +124,7 @@ export default class PageHeader extends PureComponent<IPageHeaderProps, any> {
     // Loop data mosaic routing
     const extraBreadcrumbItems = pathSnippets.map((url, index) => {
       const currentBreadcrumb = getBreadcrumb(breadcrumbNameMap, url);
-      const isLinkable =
-        index !== pathSnippets.length - 1 && currentBreadcrumb.component;
+      const isLinkable = index !== pathSnippets.length - 1 && currentBreadcrumb.component;
       return currentBreadcrumb.name && !currentBreadcrumb.hideInBreadcrumb ? (
         <Breadcrumb.Item key={url}>
           {createElement(
@@ -152,7 +148,7 @@ export default class PageHeader extends PureComponent<IPageHeaderProps, any> {
       </Breadcrumb.Item>
     );
     return (
-      <Breadcrumb className={'breadcrumb'} separator={breadcrumbSeparator}>
+      <Breadcrumb className="breadcrumb" separator={breadcrumbSeparator}>
         {extraBreadcrumbItems}
       </Breadcrumb>
     );
@@ -164,12 +160,7 @@ export default class PageHeader extends PureComponent<IPageHeaderProps, any> {
    */
   conversionBreadcrumbList = () => {
     const { breadcrumbList, breadcrumbSeparator } = this.props;
-    const {
-      routes,
-      params,
-      routerLocation,
-      breadcrumbNameMap,
-    } = this.getBreadcrumbProps();
+    const { routes, params, routerLocation, breadcrumbNameMap } = this.getBreadcrumbProps();
     if (breadcrumbList && breadcrumbList.length) {
       return this.conversionFromProps();
     }
@@ -178,7 +169,7 @@ export default class PageHeader extends PureComponent<IPageHeaderProps, any> {
     if (routes && params) {
       return (
         <Breadcrumb
-          className={'breadcrumb'}
+          className="breadcrumb"
           routes={routes.filter((route: any) => route.breadcrumbName)}
           params={params}
           itemRender={this.itemRender}
@@ -241,34 +232,31 @@ export default class PageHeader extends PureComponent<IPageHeaderProps, any> {
     return (
       <div className={clsString}>
         {breadcrumb}
-        <div className={'detail'}>
-          {logo && <div className={'logo'}>{logo}</div>}
-          <div className={'main'}>
-            <div className={'row'}>
-              {title && <h1 className={'title'}>{title}</h1>}
-              {action && <div className={'action'}>{action}</div>}
+        <div className="detail">
+          {logo && <div className="logo">{logo}</div>}
+          <div className="main">
+            <div className="row">
+              {title && <h1 className="title">{title}</h1>}
+              {action && <div className="action">{action}</div>}
             </div>
-            <div className={'row'}>
-              {content && <div className={'content'}>{content}</div>}
-              {extraContent && (
-                <div className={'extraContent'}>{extraContent}</div>
-              )}
+            <div className="row">
+              {content && <div className="content">{content}</div>}
+              {extraContent && <div className="extraContent">{extraContent}</div>}
             </div>
           </div>
         </div>
-        {tabList &&
-          tabList.length && (
-            <Tabs
-              className={'tabs'}
-              {...activeKeyProps}
-              onChange={this.onChange}
-              tabBarExtraContent={tabBarExtraContent}
-            >
-              {tabList.map((item: any) => (
-                <TabPane tab={item.tab} key={item.key} />
-              ))}
-            </Tabs>
-          )}
+        {tabList && tabList.length && (
+          <Tabs
+            className="tabs"
+            {...activeKeyProps}
+            onChange={this.onChange}
+            tabBarExtraContent={tabBarExtraContent}
+          >
+            {tabList.map((item: any) => (
+              <TabPane tab={item.tab} key={item.key} />
+            ))}
+          </Tabs>
+        )}
       </div>
     );
   }

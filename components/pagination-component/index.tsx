@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Pagination } from 'antd';
 import classnames from 'classnames';
-const styles = require('./style/index.less');
 // 分页 props 可选: defaultCurrent 当前分页默认是1 pageSize 分页条数 默认为全局配置的PageSize
 // onPageSizeChange  pageSize 变化的回调 className 必须: onChange 页码改变的回调 total 总数
 function showTotal(total: any) {
@@ -14,6 +13,7 @@ type PaginationComponentState = {
 
 interface PaginationComponentProps {
   defaultCurrent?: number;
+  current?: number;
   pageSize?: number;
   className?: any;
   pageSizeOptions?: any;
@@ -24,15 +24,22 @@ interface PaginationComponentProps {
 class Paginationcomponent extends React.Component<
   PaginationComponentProps,
   PaginationComponentState
-> {
+  > {
   constructor(props: PaginationComponentProps) {
     super(props);
     const { defaultCurrent, pageSize } = props;
     this.state = {
-      current: defaultCurrent || 10,
+      current: defaultCurrent || 1,
       pageSize: pageSize || 10,
     };
   }
+
+  componentWillReceiveProps(nextProps: PaginationComponentProps) {
+    if (nextProps.current && nextProps.current !== this.state.current) {
+      this.setState({ current: nextProps.current });
+    }
+  }
+
   onChange = (page: number, pageSize: number) => {
     this.setState(
       {
@@ -44,6 +51,7 @@ class Paginationcomponent extends React.Component<
       }
     );
   };
+
   onPageSizeChange = (current: number, size: number) => {
     this.setState(
       {
@@ -59,12 +67,13 @@ class Paginationcomponent extends React.Component<
       }
     );
   };
+
   render() {
     const { className, total } = this.props;
     const { current, pageSize } = this.state;
     // const pageSize = Math.ceil(total /);
     return (
-      <div className={classnames(className, styles['pagination-style'])}>
+      <div className={classnames(className, 'self-pagination-style')}>
         <Pagination
           current={current}
           total={total}
@@ -74,9 +83,7 @@ class Paginationcomponent extends React.Component<
           showQuickJumper
           showTotal={showTotal}
           onShowSizeChange={this.onPageSizeChange}
-          pageSizeOptions={
-            this.props.pageSizeOptions || ['10', '20', '30', '40']
-          }
+          pageSizeOptions={this.props.pageSizeOptions || ['5', '10', '20', '30', '40']}
         />
       </div>
     );
