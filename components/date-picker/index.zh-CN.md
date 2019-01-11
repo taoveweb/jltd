@@ -88,6 +88,7 @@ import 'moment/src/locale/zh-cn';
 | onChange | 时间发生变化的回调 | function(date: moment, dateString: string) | 无 |
 | onOk | 点击确定按钮的回调 | function() | - |
 | onPanelChange | 日期面板变化时的回调 | function(value, mode) | - |
+| limitDate | 截止日期 | moment | - |
 
 ### MonthPicker
 

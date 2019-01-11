@@ -83,7 +83,7 @@ class Paginationcomponent extends React.Component<
           showQuickJumper
           showTotal={showTotal}
           onShowSizeChange={this.onPageSizeChange}
-          pageSizeOptions={this.props.pageSizeOptions || ['5', '10', '20', '30', '40']}
+          pageSizeOptions={this.props.pageSizeOptions || ['10', '20', '30', '40']}
         />
       </div>
     );

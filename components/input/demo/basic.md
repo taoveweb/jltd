@@ -15,6 +15,5 @@ Basic usage example.
 
 ````jsx
 import { Input } from 'jltd';
-
 ReactDOM.render(<Input placeholder="Basic usage" />, mountNode);
 ````

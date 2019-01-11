@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, Alert } from 'antd';
+import { Table } from 'antd';
 import classNames from 'classnames';
 
 function initTotalList(columns: any) {
@@ -27,10 +27,7 @@ interface StandardTableProps {
   className?: string;
   onChange: (a: any, b: any, c: any) => void;
 }
-class StandardTable extends React.PureComponent<
-  StandardTableProps,
-  StandardTableState
-> {
+class StandardTable extends React.PureComponent<StandardTableProps, StandardTableState> {
   constructor(props: StandardTableProps) {
     super(props);
     const { columns } = props;
@@ -40,6 +37,7 @@ class StandardTable extends React.PureComponent<
       needTotalList,
     };
   }
+
   componentWillReceiveProps(nextProps: StandardTableProps) {
     // clean state
     if (nextProps.selectedRows.length === 0) {
@@ -50,6 +48,7 @@ class StandardTable extends React.PureComponent<
       });
     }
   }
+
   handleRowSelectChange = (selectedRowKeys: any, selectedRows: any) => {
     let needTotalList = [...this.state.needTotalList];
     needTotalList = needTotalList.map(item => {
@@ -63,18 +62,20 @@ class StandardTable extends React.PureComponent<
     if (this.props.onSelectRow) {
       this.props.onSelectRow(selectedRows);
     }
-    this.setState({ selectedRowKeys, needTotalList });
+    this.setState({ selectedRowKeys });
   };
+
   handleTableChange = (pagination: any, filters: any, sorter: any) => {
     this.props.onChange(pagination, filters, sorter);
   };
+
   cleanSelectedKeys = () => {
     this.handleRowSelectChange([], []);
   };
 
   render() {
     const { className, prefixCls = 'ant-standardTable' } = this.props;
-    const { selectedRowKeys, needTotalList } = this.state;
+    const { selectedRowKeys } = this.state;
     const {
       data: { list, pagination },
       loading,
@@ -82,6 +83,9 @@ class StandardTable extends React.PureComponent<
       rowKey,
     } = this.props;
     const paginationProps = {
+      showTotal: () => {
+        return `总共${pagination.total}个项目`;
+      },
       showSizeChanger: true,
       showQuickJumper: true,
       ...pagination,
@@ -97,30 +101,6 @@ class StandardTable extends React.PureComponent<
 
     return (
       <div className={classes}>
-        <div className={`${prefixCls}-tableAlert`}>
-          <Alert
-            message={
-              <React.Fragment>
-                已选择
-                <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>
-                项&nbsp;&nbsp;
-                {needTotalList.map(item => (
-                  <span style={{ marginLeft: 8 }} key={item.dataIndex}>
-                    {item.title}总计&nbsp;
-                    <span style={{ fontWeight: 600 }}>
-                      {item.render ? item.render(item.total) : item.total}
-                    </span>
-                  </span>
-                ))}
-                <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>
-                  清空
-                </a>
-              </React.Fragment>
-            }
-            type="info"
-            showIcon
-          />
-        </div>
         <Table
           loading={loading}
           rowKey={rowKey || 'key'}

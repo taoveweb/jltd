@@ -56,7 +56,7 @@ const renderDropdown = (buttonInfo: any) => {
 };
 const renderSubMenu = (buttonInfo: any) => {
   return (
-    <SubMenu title={buttonInfo.text}>
+    <SubMenu title={buttonInfo.text} key='sub-button'>
       {buttonInfo.children.map((opt: any, index: number) => {
         return (
           <Menu.Item key={index} disabled={opt.disabled}>
@@ -119,7 +119,7 @@ const buttonGroup: any = (buttonOptList: Array<any> = []) => {
   );
   const buttonList = defaultBtnOptList.map((buttonInfo: any) => {
     return (
-      <span key={buttonInfo.text}>
+      <span key={buttonInfo.text} style={{ display: 'inline-block' }}>
         {buttonInfo.children && buttonInfo.children.length > 0
           ? renderDropdown(buttonInfo)
           : renderDefaultButton(buttonInfo)}
@@ -128,7 +128,7 @@ const buttonGroup: any = (buttonOptList: Array<any> = []) => {
   });
   if (dropdownBtnOptList.length > 0) {
     buttonList.push(
-      <Dropdown overlay={menu}>
+      <Dropdown overlay={menu} key='more'>
         <Button className="button-group">
           更多 <Icon type="down" />
         </Button>

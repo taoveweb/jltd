@@ -1,6 +1,9 @@
-import { Icon, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
+// @ts-ignore
+import jp from 'jsonpath/jsonpath.min';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import Icon from '../icon';
 import { urlToList } from '../_util/pathTools';
 
 const pathToRegexp = require('path-to-regexp');
@@ -42,10 +45,8 @@ export const getMenuMatchKeys = (flatMenuKeys: any, paths: any) => paths.reduce(
   (matchKeys: any, path: any) => matchKeys.concat(flatMenuKeys.filter((item: any) => pathToRegexp(item).test(path))),
   []
 );
-type SiderMenuState = {
-  openKeys: any;
-};
-export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
+
+export default class SiderMenu extends React.PureComponent<any, any> {
   flatMenuKeys: any;
 
   constructor(props: any) {
@@ -53,6 +54,7 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
     this.flatMenuKeys = getFlatMenuKeys(props.menuData);
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
+      collapsed: false,
     };
   }
 
@@ -70,12 +72,75 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
    * /list/search/articles = > ['list','/list/search']
    * @param  props
    */
+  /*  getDefaultCollapsedSubMenus(props: any) {
+    const {
+      location: { pathname },
+    } =
+      props || this.props;
+    return getMenuMatchKeys(this.flatMenuKeys, urlToList(pathname));
+  } */
   getDefaultCollapsedSubMenus(props: any) {
+    const { menuData }: any = props;
     const {
       location: { pathname },
     } = props || this.props;
-    return getMenuMatchKeys(this.flatMenuKeys, urlToList(pathname));
+    const parentPathname = pathname.substring(0, pathname.lastIndexOf('/'));
+    const nodes = jp.nodes(menuData, '$..path');
+
+    let fd = nodes.find((value: any) => {
+      let val = value.value;
+      if (val.indexOf('#') > 0) {
+        val = val.split('#')[1];
+      }
+      return val.toLowerCase() === pathname.toLowerCase();
+    });
+
+    if (!fd) {
+      fd = nodes.find((value: any) => {
+        let val = value.value;
+        if (val.indexOf('#') > 0) {
+          val = val.split('#')[1];
+        }
+        return val.toLowerCase() === parentPathname.toLowerCase();
+      });
+    }
+
+    if (!fd) {
+      return [];
+    }
+
+    const fdf = fd.path.filter((val: any) => {
+      if (typeof val === 'number') {
+        return true;
+      }
+      return false;
+    });
+
+    const keys = fdf.map((val: any, i: any) => {
+      switch (i) {
+        case 0:
+          return this.getPath(menuData[val].path);
+        case 1:
+          return this.getPath(menuData[fdf[0]].children[val].path);
+        case 2:
+          return this.getPath(menuData[fdf[0]].children[fdf[1]].children[val].path);
+        default:
+          return null;
+      }
+    });
+
+    // keys = keys.map((val: any) => val.toLowerCase());
+    return keys;
   }
+
+  getPath = (path: any) => {
+    let val = path;
+    if (val.indexOf('#') > 0) {
+      val = val.split('#')[1];
+    }
+
+    return val;
+  };
 
   /**
    * 判断是否是http链接.返回 Link 或 a
@@ -204,14 +269,21 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
     });
   };
 
+  handleClick = ({ keyPath }: any) => {
+    this.setState({
+      selectedKeys: keyPath,
+      openKeys: keyPath,
+    });
+  };
+
   toggle = () => {
     const { collapsed, onCollapse }: any = this.props;
     onCollapse(!collapsed);
   };
 
   render() {
-    const { menuData, collapsed, onCollapse }: any = this.props;
-    const { openKeys } = this.state;
+    const { menuData }: any = this.props;
+    const { openKeys, collapsed } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed
       ? {}
@@ -228,34 +300,24 @@ export default class SiderMenu extends React.PureComponent<{}, SiderMenuState> {
         collapsible
         collapsed={collapsed}
         breakpoint="lg"
-        onCollapse={onCollapse}
+        onCollapse={collapsed => {
+          this.setState({ collapsed });
+        }}
         width={212}
         className={`${preCls}-sider`}
       >
-        {/* <div className={`${preCls}-logo`} key="logo">
-          <Link to="/">
-            <img src={logo} alt="logo" />
-            <h1>Ant Design Pro</h1>
-          </Link>
-        </div> */}
         <Menu
           key="Menu"
           theme="light"
           mode="inline"
           {...menuProps}
           onOpenChange={this.handleOpenChange}
+          onClick={this.handleClick}
           selectedKeys={selectedKeys}
           style={{ padding: '16px 0', width: '100%' }}
         >
           {this.getNavMenuItems(menuData)}
         </Menu>
-        {/* <div className="ant-layout-sider-toggle">
-          <Icon
-            className="trigger"
-            type={collapsed ? 'menu-unfold' : 'menu-fold'}
-            onClick={this.toggle}
-          />
-        </div> */}
       </Sider>
     );
   }

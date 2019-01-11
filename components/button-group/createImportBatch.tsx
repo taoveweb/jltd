@@ -1,8 +1,33 @@
 import * as React from 'react';
 import { connect } from 'dva';
-
+import * as fetch from 'dva/fetch';
+// import {LabelWithController} from 'jltd'
 import LabelWithController from '../label-with-controller';
 import ModalComponent from './ModalComponent';
+
+
+function addImportBatchNum(params:any={}) {
+  let formData = new FormData();
+  Object.keys(params).map((item:any)=>{
+    formData.append(item,params[item]);
+  })
+  return fetch('../importBatch/addImportBatchNum', {
+    method: 'POST',
+    body: formData,
+  });
+}
+
+
+function add(params:any = {}) {
+  let formData = new FormData();
+  Object.keys(params).map((item:any)=>{
+    formData.append(item,params[item]);
+  })
+  return fetch('../importBatch/add', {
+    method: 'POST',
+    body: params,
+  });
+}
 
 // 新建批次
 class CreateImportBatch extends React.Component<any, any> {
@@ -12,33 +37,20 @@ class CreateImportBatch extends React.Component<any, any> {
     this.state = {
       importBatchNum: '',
       importRemark: '',
-      visible: props.isCreateBatchModalShow,
     };
   }
 
   componentWillReceiveProps(nextPorps: any) {
-    if (
-      this.state.importBatchNum == ''
-      && nextPorps.isCreateBatchModalShow
+    if (nextPorps.isCreateBatchModalShow
       && nextPorps.isCreateBatchModalShow !== this.props.isCreateBatchModalShow
     ) {
-      this.setState({ visible: nextPorps.isCreateBatchModalShow });
-      this.props
-        .dispatch({
-          type: 'importBatchInfoList/addImportBatchNum',
+      addImportBatchNum().then(res=>res.json()).then(res=>{
+        this.setState({
+          loading: false,
+          importBatchNum:res,
+          importRemark:''
         })
-        .then(() => {
-          this.setState(() => {
-            return {
-              loading: false,
-            };
-          });
-        });
-    }
-    if (nextPorps.addImportBatchNum && nextPorps.addImportBatchNum !== this.state.importBatchNum) {
-      this.setState({
-        importBatchNum: nextPorps.addImportBatchNum,
-      });
+      })
     }
   }
 
@@ -60,25 +72,35 @@ class CreateImportBatch extends React.Component<any, any> {
     const { importBatchNum, importRemark } = this.state;
     const { templateId, orderType } = this.props;
 
-    this.props
-      .dispatch({
-        type: 'importBatchInfoList/add',
-        payload: {
-          importBatchNum,
-          importRemark,
-          orderType,
-          templateId,
-        },
-      })
-      .then(() => {
-        //        if (result.status > 0) {
-        const { onCreateBatchModelOK } = this.props;
+    add({
+      importBatchNum,
+      importRemark,
+      orderType,
+      templateId,
+    }).then(res=>res.json())
+    .then(()=>{
+      const { onCreateBatchModelOK } = this.props;
         onCreateBatchModelOK && onCreateBatchModelOK(importBatchNum, templateId);
-        //        } else {
-        //          // 错误信息在dataFetch里已经展示
-        //          // message.error(result.message);
-        //        }
-      });
+    })
+    // this.props
+    //   .dispatch({
+    //     type: 'importBatchInfoList/add',
+    //     payload: {
+    //       importBatchNum,
+    //       importRemark,
+    //       orderType,
+    //       templateId,
+    //     },
+    //   })
+    //   .then(() => {
+    //     //        if (result.status > 0) {
+    //     const { onCreateBatchModelOK } = this.props;
+    //     onCreateBatchModelOK && onCreateBatchModelOK(importBatchNum, templateId);
+    //     //        } else {
+    //     //          // 错误信息在dataFetch里已经展示
+    //     //          // message.error(result.message);
+    //     //        }
+    //   });
   };
 
   onCancel = () => {
@@ -133,7 +155,7 @@ class CreateImportBatch extends React.Component<any, any> {
   render() {
     const child = (
       <div className="ant-pro-modal-style">
-        <div className="ant-pro-right-style">
+        <div className="ant-pro-right-style importModal">
           <div>{this.renderControllerList()}</div>
         </div>
       </div>

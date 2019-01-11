@@ -1,25 +1,31 @@
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
+import fetch from 'dva/fetch'
 let permissionMap: any = null;
 const getPermissionMap = () => {
   permissionMap = {};
   /* eslint-disable react/no-namespace */
-  $.ajax({
-    url: '/system/getButtonPermission',
-    data: {},
-    cache: false,
-    async: false,
-    type: 'POST',
-    dataType: 'json',
-    success: function(data: any) {
-      permissionMap = data.data;
-    },
-  });
-  return permissionMap;
+  return fetch('/system/getButtonPermission',{
+    method:'post',
+  }).then(res=>res.json()).then((res:any)=>{
+    return res.data
+  })
+  // $.ajax({
+  //   url: '/system/getButtonPermission',
+  //   data: {},
+  //   cache: false,
+  //   async: false,
+  //   type: 'POST',
+  //   dataType: 'json',
+  //   success: function(data: any) {
+  //     permissionMap = data.data;
+  //   },
+  // });
+  // return permissionMap;
 };
 const buttonPermission = {
-  check(buttonOpt: any) {
+  async check(buttonOpt: any) {
     if (permissionMap === null) {
-      permissionMap = getPermissionMap();
+      permissionMap = await getPermissionMap();
     }
     if (!buttonOpt.menuCode || !buttonOpt.operateCode) {
       return true;

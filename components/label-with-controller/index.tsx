@@ -9,6 +9,7 @@ import {
   Icon,
   Tooltip,
   Cascader,
+  Form,
 } from 'antd';
 import classnames from 'classnames';
 // import * as moment from 'moment';
@@ -16,7 +17,7 @@ import RanderRange from './RanderRange';
 // const styles = require('./style/index.less');
 import DataDictionaryComponents from '../DataDictionaryComponents';
 import Enum from '../_util/enum';
-const moment =require("moment");
+const moment = require('moment');
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 const RadioGroup = Radio.Group;
@@ -67,6 +68,9 @@ export interface LabelWithControllerProps {
   style?: any;
   minValue?: any;
   maxValue?: any;
+  fileId?: any;
+  rules?: any;
+  form?:any
 }
 
 /* eslint-disable */
@@ -82,9 +86,8 @@ export interface LabelWithControllerProps {
 
 const LabelWithController = (props: LabelWithControllerProps) => {
   // 必填的星号提示
-  const renderRequire = props.isRequire ? (
-    <span className={'label-require'}>*</span>
-  ) : null;
+  const form = props.form;
+  const renderRequire = props.isRequire ? <span className={'label-require'}>*</span> : null;
 
   // 感叹号提示语
   const renderIconRequire = props.isIconRequire ? (
@@ -94,6 +97,16 @@ const LabelWithController = (props: LabelWithControllerProps) => {
   ) : null;
 
   let renderController = null;
+  const renderFormItem = (child: any) => {
+    let { getFieldDecorator } = form;
+    return (
+      <Form.Item>
+        {getFieldDecorator(props.fileId, {
+          rules: props.rules,
+        })(child)}
+      </Form.Item>
+    );
+  };
   // 单选框
   if (props.type === 'radioGroup') {
     const renderRadio = (props.radioData || []).map(radio => {
@@ -105,13 +118,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
     });
 
     renderController = (
-      <div
-        className={classnames(
-          'view-style',
-          'radio-group-style',
-          props.viewStyle
-        )}
-      >
+      <div className={classnames('view-style', 'radio-group-style', props.viewStyle)}>
         <RadioGroup onChange={props.onChange} value={props.value}>
           {renderRadio}
         </RadioGroup>
@@ -248,13 +255,9 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         className={classnames('view-style', props.viewStyle)}
         onChange={props.onChange}
         filterOption={props.filterOption}
-        getPopupContainer={() =>
-          document.querySelector('.ant-layout-content') as HTMLElement
-        }
+        getPopupContainer={() => document.querySelector('.ant-layout-content') as HTMLElement}
         dropdownMatchSelectWidth={
-          props.dropdownMatchSelectWidth === undefined
-            ? true
-            : props.dropdownMatchSelectWidth
+          props.dropdownMatchSelectWidth === undefined ? true : props.dropdownMatchSelectWidth
         }
         placeholder={props.placeholder}
         mode={props.mode}
@@ -278,9 +281,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         }}
         disabled={props.disabled}
         placeholder={
-          props.placeholder != undefined && props.placeholder != null
-            ? props.placeholder
-            : '请选择'
+          props.placeholder != undefined && props.placeholder != null ? props.placeholder : '请选择'
         }
       />
     );
@@ -289,15 +290,10 @@ const LabelWithController = (props: LabelWithControllerProps) => {
   if (props.type === 'rangePicker') {
     renderController = (
       <RangePicker
-        value={
-          props.DateBegin
-            ? [moment(props.DateBegin), moment(props.DateEnd)]
-            : []
-        }
+        value={props.DateBegin ? [moment(props.DateBegin), moment(props.DateEnd)] : []}
         className={classnames('view-style', props.viewStyle)}
         onChange={(moments, dateStrings) => {
-          props.onChange &&
-            props.onChange(dateStrings[0], dateStrings[1], moments);
+          props.onChange && props.onChange(dateStrings[0], dateStrings[1], moments);
         }}
         format={props.format ? props.format : 'YYYY-MM-DD HH:mm:ss'}
         showTime={props.showTime != true}
@@ -346,13 +342,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
   // 勾选框
   if (props.type === 'checkbox') {
     renderController = (
-      <div
-        className={classnames(
-          'view-style',
-          'checkbox-style',
-          props.viewStyle
-        )}
-      >
+      <div className={classnames('view-style', 'checkbox-style', props.viewStyle)}>
         <Checkbox
           defaultChecked={props.defaultValue}
           className={'view-style'}
@@ -365,13 +355,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
   // 范围输入框
   if (props.type === 'range') {
     const { onChange, minValue, maxValue } = props;
-    renderController = (
-      <RanderRange
-        onChange={onChange}
-        minValue={minValue}
-        maxValue={maxValue}
-      />
-    );
+    renderController = <RanderRange onChange={onChange} minValue={minValue} maxValue={maxValue} />;
   }
 
   // 自定义字典
@@ -385,9 +369,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         className={props.className || 'view-style'}
         onChange={props.onChange}
         dropdownMatchSelectWidth={
-          props.dropdownMatchSelectWidth === undefined
-            ? true
-            : props.dropdownMatchSelectWidth
+          props.dropdownMatchSelectWidth === undefined ? true : props.dropdownMatchSelectWidth
         }
         mode={props.mode ? props.mode : ''}
         style={props.style}
@@ -410,7 +392,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         {renderIconRequire}
         {props.label}
       </div>
-      {renderController}
+      {form ? renderFormItem(renderController) : renderController}
       {props.monetary}
     </div>
   );

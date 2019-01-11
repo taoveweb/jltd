@@ -1,5 +1,4 @@
 import { Button, Popconfirm } from 'antd';
-import Enum from '../_util/enum.js';
 
 const getOptionDataText = (list: Array<any>, value: any) => {
   let text = null;
@@ -21,7 +20,7 @@ const searchButtonGroup = (buttonList: Array<any> = []) => {
     const renderButton = (
       <Button
         className={'button-group'}
-        type={getOptionDataText(Enum.BTN_TYPE, buttonInfo.type)}
+        type={getOptionDataText([], buttonInfo.type)}
         size={buttonInfo.size || 'default'}
         onClick={buttonInfo.onClick}
       >

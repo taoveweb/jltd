@@ -1,20 +1,20 @@
-import * as React  from 'react';
-import { connect } from 'dva';
 import { Button } from 'antd';
-import {routerRedux}  from 'dva/router';
-const  queryString = require('query-string');
-
 import classnames from 'classnames';
+import { connect } from 'dva';
+import { routerRedux } from 'dva/router';
+import * as React from 'react';
 import CreateImportBatch from './createImportBatch';
 
-interface IImportExcelProps{
-  dispatch?:any,
-  buttonInfo?:any
-  buttonType?:any
+const queryString = require('query-string');
+
+interface IImportExcelProps {
+  dispatch?: any;
+  buttonInfo?: any;
+  buttonType?: any;
 }
 // 导入列表
-class ImportExcel extends React.Component<IImportExcelProps,any> {
-  constructor(props:any) {
+class ImportExcel extends React.Component<IImportExcelProps, any> {
+  constructor(props: any) {
     super(props);
     this.state = {
       isCreateBatchModalShow: false,
@@ -29,7 +29,7 @@ class ImportExcel extends React.Component<IImportExcelProps,any> {
   };
 
   // 新增批次属性确认
-  onCreateBatchModelOK = (importBatchNum:any, templateId:any) => {
+  onCreateBatchModelOK = (importBatchNum: any, templateId: any) => {
     this.setState({
       isCreateBatchModalShow: false,
     });
@@ -41,7 +41,7 @@ class ImportExcel extends React.Component<IImportExcelProps,any> {
           templateId,
           importBatchNum,
         }),
-      }),
+      })
     );
   };
 
@@ -67,32 +67,34 @@ class ImportExcel extends React.Component<IImportExcelProps,any> {
     );
   };
 
-  renderALink = (buttonInfo:any) => {
+  renderALink = (buttonInfo: any) => {
     return (
-      <a onClick={this.onAddBatchImport}>
-        {buttonInfo.text}
-        <span>
-          {this.renderImportBatchModal()}
-        </span>
-      </a>
+      <React.Fragment>
+        <a onClick={this.onAddBatchImport}>{buttonInfo.text}</a>
+        {this.renderImportBatchModal()}
+      </React.Fragment>
     );
   };
 
-  renderButton = (buttonInfo:any) => {
+  renderButton = (buttonInfo: any) => {
     return (
-      <Button
-        className={classnames("ant-pro-button-group", buttonInfo.className && buttonInfo.className)}
-        type={buttonInfo.type || 'default'}
-        size={buttonInfo.size || 'default'}
-        loading={buttonInfo.loading}
-        onClick={this.onAddBatchImport}
-        disabled={buttonInfo.disabled}
-      >
-        {buttonInfo.text}
-        <span>
-          {this.renderImportBatchModal()}
-        </span>
-      </Button>
+      <React.Fragment>
+        <Button
+          className={classnames(
+            'ant-pro-button-group',
+            'button-group',
+            buttonInfo.className && buttonInfo.className
+          )}
+          type={buttonInfo.type || 'default'}
+          size={buttonInfo.size || 'default'}
+          loading={buttonInfo.loading}
+          onClick={this.onAddBatchImport}
+          disabled={buttonInfo.disabled}
+        >
+          {buttonInfo.text}
+        </Button>
+        {this.renderImportBatchModal()}
+      </React.Fragment>
     );
   };
 
@@ -102,8 +104,4 @@ class ImportExcel extends React.Component<IImportExcelProps,any> {
     return buttonType === 'a' ? this.renderALink(buttonInfo) : this.renderButton(buttonInfo);
   }
 }
-
-function mapStateToProps() {
-  return {};
-}
-export default connect(mapStateToProps)(ImportExcel);
+export default connect(()=>({}))(ImportExcel);

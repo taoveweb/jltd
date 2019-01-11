@@ -6,3 +6,4 @@ import '../../menu/style';
 import '../../modal/style';
 import './index.less';
 import './importExcel.less';
+import './createImportBatch.less';

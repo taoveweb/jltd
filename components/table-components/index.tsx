@@ -161,6 +161,7 @@ class TableComponents extends React.Component<TableComponents, TableComponentsSt
   getTableDataSource(tableData = [], isAddable = false) {
     let tableDataSource: any = tableData;
     if (isAddable) {
+      //@ts-ignore
       tableDataSource = update(tableData, {
         $push: [this.getLastTableDataMap(tableData.length)],
       });
