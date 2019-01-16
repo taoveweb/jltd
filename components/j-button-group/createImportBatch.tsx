@@ -14,7 +14,7 @@ function addImportBatchNum(params:any={}) {
   return fetch('../importBatch/addImportBatchNum', {
     method: 'POST',
     body: formData,
-    credentials: 'include',
+    credentials: "include",
   });
 }
 
@@ -27,7 +27,7 @@ function add(params:any = {}) {
   return fetch('../importBatch/add', {
     method: 'POST',
     body: params,
-    credentials: 'include',
+    credentials: "include",
   });
 }
 
@@ -73,7 +73,9 @@ class CreateImportBatch extends React.Component<any, any> {
   onConfirm = () => {
     const { importBatchNum, importRemark } = this.state;
     const { templateId, orderType } = this.props;
-
+    if(!importBatchNum){
+      return 
+    }
     add({
       importBatchNum,
       importRemark,

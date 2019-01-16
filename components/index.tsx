@@ -120,7 +120,10 @@ export { default as LocaleProvider } from './locale-provider';
 export { default as BasicLayout } from './basic-layout';
 export { default as ImportTemplatePage } from './import-template-page';
 export { default as JForm } from './j-form';
+
 export { default as JSelect } from './j-select';
 export { default as JDatePicker } from './j-date-picker';
 export { default as JInput } from './j-input';
 export { default as JCard } from './j-card';
+export { default as JButtonGroup } from './j-button-group';
+export { default as JProgress } from './j-progress';

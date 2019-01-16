@@ -13,7 +13,30 @@ timeline: true
 * 次版本号：每月发布一个带有新特性的向下兼容的版本。
 * 主版本号：含有破坏性更新和新特性，不在发布周期内。
 
+
 ---
+---
+## 修复
+`2019-1-16`
+- 📖 修复j-form组件下，日期选择器无法使用年选择，月选择bug
+
+## 新增
+`2019-1-14`
+- 📖 新增JProgress组件
+
+## 3.11.43
+`2019-1-14`
+
+- 📖 JInput.Search 的readOnly 默认值为true  
+- 📖 buttonGroup 功能废弃不用   新增JButtonGroup组件替代 <JButtonGroup data={[按钮数组(很原来一致)]}/>
+- 📖 JDatePicker 添加开始禁止时间和结束禁止时间2个字段 limitStartTime | limitEndTime(原limitTime等价与limitStartTime ，做兼容处理了，所以可以不用改，以后都用limitStartTime 就行)
+
+
+`2018-07-11`
+
+- 📖 发布了全新的官网和设计文档。
+- 📖 二次封装antd
+- 📖 添加现有框架组件
 
 ## 1.0.X
 

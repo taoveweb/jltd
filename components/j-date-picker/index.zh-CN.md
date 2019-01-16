@@ -64,7 +64,9 @@ import 'moment/src/locale/zh-cn';
 | size | 输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px | string | 无 |
 | style | 自定义输入框样式 | object | {} |
 | onOpenChange | 弹出日历和关闭日历的回调 | function(status) | 无 |
-| limitTime | 日期选择截止日期 | moment \| string | 无 |
+| limitTime | 日期选择截止日期(新版请使用limitStartTime) | moment \| string | 无 |
+| limitStartTime | 日期选择开始截止日期(同limitTime) | moment \| string | 无 |
+| limitEndTime | 日期选择开始截止日期 | moment \| string | 无 |
 
 ### 共同的方法
 

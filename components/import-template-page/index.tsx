@@ -110,7 +110,9 @@ class ImportTemplate extends React.Component<any,any> {
   initData = () => {
     const { templateId, importBatchNum } = this.state;
     fetch(
-      `../importExportTemplate/findImportTemplate?templateId=${templateId}&importBatchNum=${importBatchNum}`
+      `../importExportTemplate/findImportTemplate?templateId=${templateId}&importBatchNum=${importBatchNum}`,{
+        credentials: 'include',
+      }
     )
       .then((res:any)=> res.json())
       .then((data:any) => {
@@ -163,7 +165,9 @@ class ImportTemplate extends React.Component<any,any> {
 
   queryTableInit = () => {
     const { templateId } = this.state;
-    fetch(`../importExportTemplate/findColumn?${qs.stringify({ templateId })}`)
+    fetch(`../importExportTemplate/findColumn?${qs.stringify({ templateId })}`,{
+      credentials: 'include',
+    })
       .then(res => res.json())
       .then(data => {
         if(data.code==22){
@@ -348,6 +352,7 @@ class ImportTemplate extends React.Component<any,any> {
           method: 'post',
           // body:JSON.stringify({importBatchNum,templateId})
           body: formData,
+          credentials: 'include',
         })
           .then(res => res.json())
           .then(data => {
@@ -389,6 +394,7 @@ class ImportTemplate extends React.Component<any,any> {
       fetch(`../importExportTemplate/getImportProgress`, {
         method: 'post',
         body: formData,
+        credentials: 'include',
       })
         .then(res => res.json())
         .then(data => {
@@ -477,6 +483,7 @@ class ImportTemplate extends React.Component<any,any> {
         fetch(`../importExportTemplate/importTemplateSumbit`, {
           method: 'post',
           body: formData,
+          credentials: 'include',
         })
           .then(res => res.json())
           .then(data => {
@@ -521,6 +528,7 @@ class ImportTemplate extends React.Component<any,any> {
       fetch(`../importExportTemplate/getImportProgress`, {
         method: 'post',
         body: formData,
+        credentials: 'include',
       })
         .then(res => res.json())
         .then(data => {
@@ -657,7 +665,8 @@ class ImportTemplate extends React.Component<any,any> {
     }
     fetch(`../importExportTemplate/updateMongoDB`,{
       method:'post',
-      body:formData
+      body:formData,
+      credentials: 'include',
     })
       .then(res => res.json())
       .then(data => {
@@ -742,7 +751,9 @@ class ImportTemplate extends React.Component<any,any> {
         pageSize: 10,
         importBatchNum,
         showStatus,
-      })}`
+      })}`,{
+        credentials: 'include',
+      }
     )
       .then(res => res.json())
       .then(res => {
@@ -797,7 +808,8 @@ class ImportTemplate extends React.Component<any,any> {
             ...payload,
             importBatchNum,
             showStatus,
-          })}`
+          })}`,
+          {credentials: 'include',}
         )
           .then(res => res.json())
           .then(res => {

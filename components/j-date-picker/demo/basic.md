@@ -13,9 +13,13 @@ title:
 
 
 ````jsx
-import { JDatePicker } from 'jltd';
+import { JDatePicker,DatePicker } from 'jltd';
 import moment from 'moment'
+// limitEendTime='2019-1-3 12:35'
+// limitTime={'2019-1-1 12:35'}
 ReactDOM.render(
-    <JDatePicker limitTime={'2019-1-1 12:35'} showTime={{ format: 'HH:mm' }} value={moment()} format='YYYY-MM-DD HH:mm'/>
+  <div>
+    <JDatePicker limitTime={'2019-1-1 12:35'} limitEndTime='2019-1-3 12:35' showTime={{ format: 'HH:mm' }} format='YYYY-MM-DD HH:mm' />
+  </div>
 , mountNode);
 ````

@@ -2,6 +2,7 @@ import * as moment from 'moment';
 
 export function setValuesFunction(_this: any) {
   _this.props.form.values = (params?: any) => {
+    _this.getFormat(true);
     let data = _this.props.form.getFieldsValue(params);
     let result: any = {};
     Object.keys(data).map((item: any) => {

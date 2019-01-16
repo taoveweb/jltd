@@ -14,7 +14,7 @@ class AdvancedSearchForm extends React.Component<any, any> {
     setValuesFunction(this);
   }
 
-  getFormat() {
+  getFormat(update?:boolean) {
     this.datePicker = {};
     this.props.datas &&
       this.props.datas.map((item: any) => {
@@ -56,9 +56,11 @@ class AdvancedSearchForm extends React.Component<any, any> {
           };
         }
       });
-    setTimeout(() => {
-      this.forceUpdate();
-    });
+      if(!update){
+        setTimeout(() => {
+          this.forceUpdate();
+        },100);
+      }
   }
 
   handleSearch = (e: any) => {
@@ -183,7 +185,6 @@ class AdvancedSearchForm extends React.Component<any, any> {
     if (this.props.isModal) {
       rowClass = 'ant-advanced-search-form-flex ant-advanced-search-form-modal';
     }
-    this.getFormat();
     return (
       <Form
         className="ant-advanced-search-form"

@@ -39,7 +39,15 @@ class Search extends React.Component<any, any> {
   }
 
   render() {
-    const { allowClear, className, onClear, onChange, getChildRef, ...rest } = this.props;
+    const {
+      allowClear,
+      className,
+      onClear,
+      onChange,
+      getChildRef,
+      readOnly = true,
+      ...rest
+    } = this.props;
     const { showClear } = this.state;
     let suffix;
     if (allowClear) {
@@ -69,6 +77,7 @@ class Search extends React.Component<any, any> {
           this.setState({ showClear: !!e.target.value });
           onChange && onChange(e);
         }}
+        readOnly={readOnly}
         suffix={showClear && suffix}
         ref={e => {
           // @ts-ignore
@@ -80,11 +89,11 @@ class Search extends React.Component<any, any> {
     );
   }
 }
-MyInput._name = 'Input'
+MyInput._name = 'Input';
 // @ts-ignore
-Search._name = 'Search'
+Search._name = 'Search';
 // @ts-ignore
-Input.TextArea._name = 'TextArea'
+Input.TextArea._name = 'TextArea';
 MyInput.Search = Search;
 MyInput.Group = Input.Group;
 MyInput.TextArea = Input.TextArea;

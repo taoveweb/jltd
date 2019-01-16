@@ -48,12 +48,12 @@ export default class GlobalHeader extends React.PureComponent<IGlobalHeaderProps
     const info = [];
     let url = './HeaderView/logo_pic.png';
     if (currentUser.logoPic) {
-      url = currentUser.logoPic;
+      url = `../file/downLoadFile?pmCode=${currentUser.logoPic}`
     }
 
     info.push(
       <div className="antd-header-logo-pic">
-        <img src={`../file/downLoadFile?pmCode=${url}`} />
+        <img src={url} />
       </div>
     );
 
