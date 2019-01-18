@@ -1,0 +1,51 @@
+@import '../../style/default.less';
+
+.search-view {
+  display: flex;
+  height: 104px;
+  border-style: solid;
+  border-width: 0px;
+  border-radius: 2px;
+  border-color: #bbb;
+  overflow: hidden;
+  .search-view-open {
+    height: auto;
+  }
+  
+  .search-controller {
+    flex: 1;
+  }
+  
+  .search-btn-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  
+  .search-btn {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .open-btn {
+    .font_14;
+    margin-top: 20px;
+    width: 50px;
+    color: @blue;
+    line-height: 32px;
+    cursor: pointer;
+  }
+  
+  .icon {
+    margin-left: 5px;
+  }
+  
+  .div-unauto-width {
+    width: unset;
+  }
+}
+
+

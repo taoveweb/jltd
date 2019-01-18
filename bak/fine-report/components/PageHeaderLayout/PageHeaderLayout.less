@@ -1,0 +1,22 @@
+@import '~antd/lib/style/themes/default.less';
+
+@nav-width: 211px;
+@padding-width: 12px;
+
+.jlt-body {
+  margin: 12px 12px 0 12px;
+  min-width: 1300px - @nav-width - 2 * @padding-width;
+  padding-bottom: @padding-width;
+  // margin: @padding-width;
+  background-color: white;
+}
+
+.jlt-content {
+  margin: 0 24px;
+}
+
+@media screen and (max-width: @screen-sm) {
+  .jlt-content {
+    margin: 24px 0 0;
+  }
+}
