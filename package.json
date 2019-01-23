@@ -1,6 +1,6 @@
 {
   "name": "jltd",
-  "version": "3.11.53",
+  "version": "3.11.58",
   "title": "jlt Design",
   "description": "An enterprise-class UI design language and React-based implementation",
   "homepage": "http://ant.design/",
@@ -209,8 +209,8 @@
     "sort-api": "node ./scripts/sort-api-table.js",
     "dist": "antd-tools run dist",
     "compile": "antd-tools run compile && npm run copyLib && npm run copyEs &&  npm run publish",
-    "copyLib": "rm -rf ~/Documents/new/V6.1.1.20190124/jlt-lc-public/node_modules/jltd/lib/* && scp -r ~/Documents/new/jlt-design/lib/* ~/Documents/new/V6.1.1.20190124/jlt-lc-public/node_modules/jltd/lib/",
-    "copyEs": "rm -rf ~/Documents/new/V6.1.1.20190124/jlt-lc-public/node_modules/jltd/es/* && scp -r ~/Documents/new/jlt-design/es/* ~/Documents/new/V6.1.1.20190124/jlt-lc-public/node_modules/jltd/es/",
+    "copyLib": "rm -rf ~/Documents/new1/V6.2.1.20190228/jlt-tms-public/node_modules/jltd/lib/* && scp -r ~/Documents/new1/jlt-design/lib/* ~/Documents/new1/V6.2.1.20190228/jlt-tms-public/node_modules/jltd/lib/",
+    "copyEs": "rm -rf ~/Documents/new1/V6.2.1.20190228/jlt-tms-public/node_modules/jltd/es/* && scp -r ~/Documents/new1/jlt-design/es/* ~/Documents/new1/V6.2.1.20190228/jlt-tms-public/node_modules/jltd/es/",
     "publish": "npm publish",
     "tsc": "tsc",
     "start": "rimraf _site && mkdir _site && node ./scripts/generateColorLess.js && cross-env NODE_ENV=development bisheng start -c ./site/bisheng.config.js",

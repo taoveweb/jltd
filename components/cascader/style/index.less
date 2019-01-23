@@ -178,6 +178,9 @@
     }
   }
   &-menu-item {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding: 5px @control-padding-horizontal;
     line-height: 22px;
     cursor: pointer;
@@ -220,9 +223,4 @@
       color: @highlight-color;
     }
   }
-}
-.ant-cascader-menu-item {
-  max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 const pathToRegexp = require('path-to-regexp');
 import { Link } from 'react-router-dom';
-require('./style/SiderMenu.less');
 // import { urlToList } from '../_util/pathTools';
 const { Sider } = Layout;
 const { SubMenu } = Menu;

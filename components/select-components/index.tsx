@@ -3,7 +3,6 @@ import url from '../_util/url';
 import * as $ from 'jquery';
 
 import { Select } from 'antd';
-const styles = require('./style/index');
 
 const Option = Select.Option;
 type SelectComponentsState = {
@@ -117,7 +116,7 @@ class SelectComponents extends React.Component<
       <div>
         <Select
           {...this.props}
-          className={styles['view-style']}
+          className={'select-components-view-style'}
           style={style}
           onChange={this.onSelectChange}
         >

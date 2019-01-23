@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { InputNumber } from 'antd';
 import classnames from 'classnames';
-// const styles = require('./style/index');
 
 
 interface RanderRangeProps {

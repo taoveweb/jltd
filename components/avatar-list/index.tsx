@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Tooltip, Avatar } from 'antd';
 import classNames from 'classnames';
 
-const  styles =require( './style/indexnolink.less');
 
 const AvatarList = ({ children, size, ...other }:any) => {
   const childrenWithProps = React.Children.map(children, (child:any) =>
@@ -12,17 +11,17 @@ const AvatarList = ({ children, size, ...other }:any) => {
   );
 
   return (
-    <div {...other} className={styles.avatarList}>
+    <div {...other} className={"avatar-list-avatarList"}>
       <ul> {childrenWithProps} </ul>
     </div>
   );
 };
 
 const Item = ({ src, size, tips, onClick = () => {} }:any) => {
-  const cls = classNames(styles.avatarItem, {
-    [styles.avatarItemLarge]: size === 'large',
-    [styles.avatarItemSmall]: size === 'small',
-    [styles.avatarItemMini]: size === 'mini',
+  const cls = classNames("avatar-list-avatarItem", {
+    ['avatar-list-avatarItemLarge']: size === 'large',
+    ['avatar-list-avatarItemSmall']: size === 'small',
+    ['avatar-list-avatarItemMini']: size === 'mini',
   });
 
   return (

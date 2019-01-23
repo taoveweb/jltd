@@ -1,7 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
 
-// import styles from './style/jcard.less';
 
 const PureComponent= React.PureComponent;
 export interface JCardProps{

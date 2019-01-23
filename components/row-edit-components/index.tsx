@@ -17,12 +17,11 @@ import Icon from '../icon';
 import DatePicker from '../date-picker';
 import Checkbox from '../checkbox';
 import Radio from '../radio';
-import InputNumber from '../input-number';
+import InputNumber from '../input-number';Ø
 import Cascader from '../calendar'; */
 
 import classnames from 'classnames';
 import * as moment from 'moment';
-const styles = require('./style/index.less');
 import RanderRange from '../label-with-controller/RanderRange';
 import DataDictionaryComponents from '../DataDictionaryComponents';
 import Enum from '../_util/enum';
@@ -220,7 +219,7 @@ class RowEditComponents extends React.Component<
           {...valueProps}
           defaultValue={this.props.defaultValue}
           placeholder={this.props.placeholder || Enum.DEFAULT_PLACEHOLDER}
-          className={styles['view-style']}
+          className={'row-edit-view-style'}
           disabled={this.props.disabled === true}
           style={this.props.style}
           onBlur={this.onBlur.bind(this,this.props)}
@@ -264,7 +263,7 @@ class RowEditComponents extends React.Component<
           rows={this.props.rows === undefined ? 4 : this.props.rows}
           value={this.props.value}
           placeholder={this.props.placeholder || Enum.DEFAULT_PLACEHOLDER}
-          className={classnames(styles['view-style'], this.props.viewStyle)}
+          className={classnames('row-edit-view-style', this.props.viewStyle)}
           disabled={this.props.disabled === true}
           style={this.props.style}
           maxLength={props.maxLength || 255}
@@ -283,7 +282,7 @@ class RowEditComponents extends React.Component<
           defaultValue={this.props.defaultValue}
           placeholder={this.props.placeholder || Enum.DEFAULT_PLACEHOLDER}
           onChange={this.props.onChange}
-          className={styles['view-style']}
+          className={'row-edit-view-style'}
           enterButton
           onSearch={this.props.onSearch}
           readOnly={this.props.readOnly}
@@ -318,7 +317,7 @@ class RowEditComponents extends React.Component<
           onChange={this.props.onChange}
           filterOption={this.props.filterOption}
           style={this.props.style || { width: 170 }}
-          className={this.props.className || styles['view-style']}
+          className={this.props.className || 'row-edit-view-style'}
           placeholder={this.props.placeholder || Enum.DEFAULT_PLACEHOLDER}
           dropdownMatchSelectWidth={
             this.props.dropdownMatchSelectWidth === undefined
@@ -334,7 +333,7 @@ class RowEditComponents extends React.Component<
     if (this.props.type === 'dataPicker') {
       renderController = (
         <DatePicker
-          className={styles['view-style']}
+          className={'row-edit-view-style'}
           defaultValue={
             this.props.defaultValue ? this.props.defaultValue : null
           }
@@ -415,7 +414,7 @@ class RowEditComponents extends React.Component<
           }
           value={this.props.value}
           defaultValue={this.props.defaultValue}
-          className={this.props.className || styles['view-style']}
+          className={this.props.className || 'row-edit-view-style'}
           style={this.props.style || { width: 170 }}
           onChange={this.props.onChange}
           placeholder={this.props.placeholder || Enum.DEFAULT_PLACEHOLDER}
@@ -451,7 +450,7 @@ class RowEditComponents extends React.Component<
           {...valueProps}
           defaultValue={this.props.defaultValue}
           placeholder={this.props.placeholder || Enum.DEFAULT_PLACEHOLDER}
-          className={styles['view-style']}
+          className={'row-edit-view-style'}
           readOnly
           disabled={this.props.disabled}
           style={this.props.style}

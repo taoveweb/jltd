@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Form, Modal,Row, Col, Table, Input,message} from 'antd';
 const FormItem = Form.Item;
-const styles = require('./style/index.less');
 import buttonGroup from '../button-group';
 import EmptyUtils from '../_util/emptyUtils';
 import update from 'immutability-helper';
@@ -230,8 +229,8 @@ class ModalSearchComponent extends React.Component<ModalSearchComponentControlle
       return (
         <Modal title={modalTitle} visible={visible} onOk={this.categoryFormCreate}
           onCancel={onCancel} destroyOnClose={true} width={800} className={'ant-modal-search-component'}>
-          <Row className={styles['display-flex']}>
-            <Col className={styles['serach-form-row3']}> {
+          <Row className={'display-flex'}>
+            <Col className={'serach-form-row3'}> {
               <Form>
                 {
                   moadlObject.map((moadlObject:any)=>{
@@ -247,8 +246,8 @@ class ModalSearchComponent extends React.Component<ModalSearchComponentControlle
                 }
               </Form>
             } </Col>
-            <Col className={styles['serach-form-row2-button']}>
-              <div className={styles['search-btn-group']}>
+            <Col className={'serach-form-row2-button'}>
+              <div className={'search-btn-group'}>
                 <div> {buttonGroup(topButtonList)} </div>
               </div>
             </Col>

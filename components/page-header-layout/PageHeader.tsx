@@ -4,7 +4,6 @@ import { routerRedux } from 'dva/router';
 import { Button, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-// import styles from './PageHeader.less';
 const PureComponent = React.PureComponent;
 export interface JCardProps{
   title:String,

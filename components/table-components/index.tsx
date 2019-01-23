@@ -3,7 +3,6 @@ import update from 'immutability-helper';
 import { DatePicker, Table, Input, Popconfirm, Icon } from 'antd';
 
 const moment = require('moment');
-const styles = require('./style/index.less');
 
 const EditableCell = (arr: { editable: any; value: any; onChange: any; datable: any }) => {
   return (
@@ -111,7 +110,7 @@ class TableComponents extends React.Component<TableComponents, TableComponentsSt
               ) : (
                 <span>
                   {isEditable && (
-                    <a className={styles['icon-style']} onClick={() => this.edit(index)}>
+                    <a className={'table-componentsicon-style'} onClick={() => this.edit(index)}>
                       <Icon type="edit" />
                     </a>
                   )}

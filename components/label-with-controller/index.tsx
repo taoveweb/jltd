@@ -14,7 +14,6 @@ import {
 import classnames from 'classnames';
 // import * as moment from 'moment';
 import RanderRange from './RanderRange';
-// const styles = require('./style/index.less');
 import DataDictionaryComponents from '../DataDictionaryComponents';
 import Enum from '../_util/enum';
 const moment = require('moment');
@@ -70,7 +69,7 @@ export interface LabelWithControllerProps {
   maxValue?: any;
   fileId?: any;
   rules?: any;
-  form?:any
+  form?: any;
 }
 
 /* eslint-disable */
@@ -147,6 +146,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         onChange={e => {
           props.onChange && props.onChange(e);
         }}
+        {...props}
       />
     );
   }
@@ -173,6 +173,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         }}
         onClick={props.onClick}
         readOnly={props.readOnly}
+        {...props}
       />
     );
   }
@@ -195,6 +196,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         onChange={e => {
           props.onChange && props.onChange(e.target.value.trim());
         }}
+        {...props}
       />
     );
   }
@@ -222,6 +224,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         onBlur={e => {
           props.onBlur && props.onBlur(e.target.value);
         }}
+        {...props}
       />
     );
   }
@@ -246,7 +249,6 @@ const LabelWithController = (props: LabelWithControllerProps) => {
 
     renderController = (
       <Select
-        allowClear
         disabled={props.disabled === true || false}
         showSearch={showSearch}
         optionFilterProp={optionFilterProp}
@@ -261,6 +263,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         }
         placeholder={props.placeholder}
         mode={props.mode}
+        {...props}
       >
         {renderOption}
       </Select>
@@ -283,6 +286,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         placeholder={
           props.placeholder != undefined && props.placeholder != null ? props.placeholder : '请选择'
         }
+        {...props}
       />
     );
   }
@@ -290,6 +294,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
   if (props.type === 'rangePicker') {
     renderController = (
       <RangePicker
+        // @ts-ignore
         value={props.DateBegin ? [moment(props.DateBegin), moment(props.DateEnd)] : []}
         className={classnames('view-style', props.viewStyle)}
         onChange={(moments, dateStrings) => {
@@ -298,6 +303,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         format={props.format ? props.format : 'YYYY-MM-DD HH:mm:ss'}
         showTime={props.showTime != true}
         placeholder={props.placeholder}
+        {...props}
       />
     );
   }
@@ -335,6 +341,7 @@ const LabelWithController = (props: LabelWithControllerProps) => {
         disabled={props.disabled === true}
         placeholder="请选择"
         value={props.defaultValue ? props.defaultValue : props.value}
+        {...props}
       />
     );
   }
@@ -354,8 +361,10 @@ const LabelWithController = (props: LabelWithControllerProps) => {
 
   // 范围输入框
   if (props.type === 'range') {
-    const { onChange, minValue, maxValue } = props;
-    renderController = <RanderRange onChange={onChange} minValue={minValue} maxValue={maxValue} />;
+    const { onChange, minValue, maxValue, ...rest } = props;
+    renderController = (
+      <RanderRange onChange={onChange} minValue={minValue} maxValue={maxValue} {...rest} />
+    );
   }
 
   // 自定义字典

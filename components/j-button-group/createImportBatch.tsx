@@ -15,19 +15,21 @@ function addImportBatchNum(params:any={}) {
     method: 'POST',
     body: formData,
     credentials: "include",
+    headers:{
+      "Content-Type":'application/x-www-form-urlencoded'
+    },
   });
 }
 
 
 function add(params:any = {}) {
-  let formData = new FormData();
-  Object.keys(params).map((item:any)=>{
-    formData.append(item,params[item]);
-  })
   return fetch('../importBatch/add', {
     method: 'POST',
-    body: params,
-    credentials: "include",
+    body: JSON.stringify(params),
+    headers: {
+      'content-type': 'application/json;charset=UTF-8',
+    },
+    credentials: 'include',
   });
 }
 

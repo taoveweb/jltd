@@ -18,10 +18,10 @@ import { Cascader } from 'jltd';
 
 const options = [{
   value: 'zhejiang',
-  label: 'Zhejiang',
+  label: 'ZhejiangZhejiangZhejiangZhejiangZhejiangZhejiangZhejiangZhejiangZhejiang',
   children: [{
     value: 'hangzhou',
-    label: 'Hangzhou',
+    label: 'hangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhouhangzhou',
     children: [{
       value: 'xihu',
       label: 'West Lake',

@@ -52,7 +52,7 @@ export default class GlobalHeader extends React.PureComponent<IGlobalHeaderProps
     }
 
     info.push(
-      <div className="antd-header-logo-pic">
+      <div key="antd-header-logo-pic"  className="antd-header-logo-pic">
         <img src={url} />
       </div>
     );

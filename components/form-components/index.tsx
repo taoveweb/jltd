@@ -12,7 +12,6 @@ import {
   InputNumber,
   Icon,
 } from 'antd';
-// const styles = require('./style/index.less');
 import classnames from 'classnames';
 import * as moment from 'moment';
 import RanderRange from '../label-with-controller/RanderRange';

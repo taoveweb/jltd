@@ -6,7 +6,6 @@ import { connect } from 'dva';
 import buttonPermission from './buttonPermission';
 import ImportExcel from './importExcel';
 // 外引用组件
-const styles = require('./buttonGroup.less');
 
 const { SubMenu } = Menu;
 const renderButton: any = (buttonInfo: any) => {
@@ -18,7 +17,7 @@ const renderButton: any = (buttonInfo: any) => {
     <ImportExcel buttonInfo={buttonInfo} />
   ) : (
     <Button
-      className={classnames(styles['button-group'], buttonInfo.className)}
+      className={classnames('j-button-groupbutton-group', buttonInfo.className)}
       type={buttonInfo.type || 'default'}
       size={buttonInfo.size || 'default'}
       /* loading={
@@ -54,7 +53,7 @@ const renderDropdown = (buttonInfo: any) => {
   );
   return (
     <Dropdown overlay={menu}>
-      <Button className={styles['button-group']}>
+      <Button className={'j-button-groupbutton-group'}>
         {buttonInfo.text} <Icon type="down" />
       </Button>
     </Dropdown>
@@ -135,7 +134,7 @@ const buttonGroup: any = (buttonOptList: Array<any> = []) => {
   if (dropdownBtnOptList.length > 0) {
     buttonList.push(
       <Dropdown overlay={menu}>
-        <Button className={styles['button-group']}>
+        <Button className={'j-button-groupbutton-group'}>
           更多 <Icon type="down" />
         </Button>
       </Dropdown>

@@ -1,4 +1,4 @@
-import './importTemplate.less'
+import './index.less'
 import '../../button/style'
 import '../../card/style'
 import '../../dropdown/style'

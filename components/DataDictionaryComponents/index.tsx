@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Select } from 'antd';
 import * as $ from 'jquery';
-const styles = require('./DataDictionaryComponents.less');
 
 import url from '../_util/url';
 const Option = Select.Option;
@@ -94,7 +93,7 @@ class DataDictionaryComponents extends React.Component<
             allowClear={this.props.allowClear}
             placeholder={this.props.placeholder}
             defaultValue={this.props.defaultValue}
-            className={this.props.className || styles['view-style']}
+            className={this.props.className || 'DataDictionary-view-style'}
             style={this.props.style}
             onChange={this.props.onChange}
             dropdownMatchSelectWidth={

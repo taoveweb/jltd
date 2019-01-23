@@ -3,7 +3,6 @@ import { Form, Input, Select, DatePicker, Checkbox, Radio } from 'antd';
 import classnames from 'classnames';
 import * as moment from 'moment';
 
-const styles = require('./style/index.less');
 
 // import DataDictionaryComponents from '../../DataDictionaryComponents';
 const { RangePicker } = DatePicker;
@@ -127,7 +126,7 @@ class EditableCell extends React.Component<EditableCellProps> {
           <Input
             maxLength={this.props.maxLength}
             placeholder={this.props.placeholder}
-            className={styles['view-style']}
+            className={'editable-cell-view-style'}
             disabled={this.props.disabled === true}
             style={this.props.style}
             onBlur={e => {
@@ -148,7 +147,7 @@ class EditableCell extends React.Component<EditableCellProps> {
             rows={this.props.rows === undefined ? 4 : this.props.rows}
             value={this.props.value}
             placeholder={this.props.placeholder}
-            className={classnames(styles['view-style'], this.props.viewStyle)}
+            className={classnames('editable-cell-view-style', this.props.viewStyle)}
             disabled={this.props.disabled === true}
             style={this.props.style}
             onChange={e => {
@@ -164,7 +163,7 @@ class EditableCell extends React.Component<EditableCellProps> {
             defaultValue={this.props.defaultValue}
             placeholder={this.props.placeholder}
             onSearch={this.props.onChange}
-            className={styles['view-style']}
+            className={'editable-cell-view-style'}
             onClick={this.props.onClick}
           />
         );
@@ -200,7 +199,7 @@ class EditableCell extends React.Component<EditableCellProps> {
             onChange={onChange}
             filterOption={filterOption}
             style={style || { width: 170 }}
-            className={className || styles['view-style']}
+            className={className || 'editable-cell-view-style'}
             dropdownMatchSelectWidth={
               dropdownMatchSelectWidth === undefined ? true : dropdownMatchSelectWidth
             }
@@ -212,7 +211,7 @@ class EditableCell extends React.Component<EditableCellProps> {
       case 'dataPicker':
         return (
           <DatePicker
-            className={styles['view-style']}
+            className={'editable-cell-view-style'}
             defaultValue={this.props.defaultValue}
             format="YYYY/MM/DD"
             onChange={(moments, dateStrings) => {
@@ -238,7 +237,7 @@ class EditableCell extends React.Component<EditableCellProps> {
         );
       case 'checkbox':
         return (
-          <div className={classnames(styles['view-style'], styles['checkbox-style'])}>
+          <div className={classnames('editable-cell-view-style', 'editable-cell-checkbox-style')}>
             <Checkbox defaultChecked={this.props.defaultValue} onChange={this.props.onChange} />
           </div>
         );
@@ -251,7 +250,7 @@ class EditableCell extends React.Component<EditableCellProps> {
           );
         });
         return (
-          <div className={classnames(styles['view-style'], styles['radio-group-style'])}>
+          <div className={classnames('editable-cell-view-style', 'editable-cell-radio-group-style')}>
             <RadioGroup
               onChange={e => {
                 this.props.onChange(e.target.value);
