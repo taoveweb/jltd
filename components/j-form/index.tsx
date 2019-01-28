@@ -14,7 +14,7 @@ class AdvancedSearchForm extends React.Component<any, any> {
     setValuesFunction(this);
   }
 
-  getFormat(update?:boolean) {
+  getFormat(update?: boolean) {
     this.datePicker = {};
     this.props.datas &&
       this.props.datas.map((item: any) => {
@@ -56,11 +56,11 @@ class AdvancedSearchForm extends React.Component<any, any> {
           };
         }
       });
-      if(!update){
-        setTimeout(() => {
-          this.forceUpdate();
-        },100);
-      }
+    if (!update) {
+      setTimeout(() => {
+        this.forceUpdate();
+      }, 100);
+    }
   }
 
   handleSearch = (e: any) => {
@@ -87,7 +87,7 @@ class AdvancedSearchForm extends React.Component<any, any> {
   // To generate mock Form.Item
   getFields() {
     const { datas, isSearch, showDetail, colon = false } = this.props;
-    const count = !isSearch || this.state.expand ? 100 : 6;
+    let count = !isSearch || this.state.expand ? 100 : 6;
 
     const { getFieldDecorator } = this.props.form;
     const children = [];
@@ -111,6 +111,9 @@ class AdvancedSearchForm extends React.Component<any, any> {
       if (item.value || item.initialValue) {
         options.initialValue = item.value || item.initialValue;
       }
+      if (item.hide && i < count) {
+        count++;
+      }
       children.push(
         <Col
           span={spann}
@@ -120,8 +123,11 @@ class AdvancedSearchForm extends React.Component<any, any> {
           style={{ display: i < count && !item.hide ? 'block' : 'none' }}
         >
           {showDetail ? (
-            <div className='detail-label'>
-              <span className="info-label">{item.label}{(item.colon || colon || false)&&':'}</span>
+            <div className="detail-label">
+              <span className="info-label">
+                {item.label}
+                {(item.colon || colon || false) && ':'}
+              </span>
               <span className="info-value">{item.node}</span>
             </div>
           ) : (
@@ -156,6 +162,8 @@ class AdvancedSearchForm extends React.Component<any, any> {
     if (!this.props.isSearch) {
       return null;
     }
+    let showMore = this.props.datas.filter((item: any) => !item.hide).length > 6;
+
     return (
       <Row className="ant-advanced-search-form-btn">
         <Row>
@@ -169,7 +177,7 @@ class AdvancedSearchForm extends React.Component<any, any> {
           </Col>
         </Row>
         <Row>
-          {this.props.datas.length > 6 && (
+          {showMore && (
             <a style={{ fontSize: 14, marginTop: 23, display: 'block' }} onClick={this.toggle}>
               {this.state.expand ? '收起' : '更多'}
               <Icon type={this.state.expand ? 'up' : 'down'} />

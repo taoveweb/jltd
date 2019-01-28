@@ -4,7 +4,6 @@ import { Button, Popconfirm, Dropdown, Menu, Icon } from 'antd';
 import classnames from 'classnames';
 import { connect } from 'dva';
 import * as fetch from 'dva/fetch';
-// import buttonPermission from './buttonPermission';
 import ImportExcel from './importExcel'; // 外引用组件
 import operationButtonGroup from './operationButtonGroup';
 
@@ -32,7 +31,7 @@ const renderMenuItem = (buttonInfo: any) => {
   return buttonInfo.templateId ? (
     <ImportExcel buttonInfo={buttonInfo} buttonType="a" />
   ) : (
-    <a onClick={buttonInfo.onClick}>{buttonInfo.text}</a>
+    <div onClick={buttonInfo.onClick}>{buttonInfo.text}</div>
   );
 };
 const renderDropdown = (buttonInfo: any) => {
@@ -108,27 +107,38 @@ class ButtonGroup extends React.Component<any, any> {
     super(props);
     this.state = {
       buttonList: [],
+      permissionList: [],
     };
   }
+
   componentDidMount() {
     this.getPermission();
   }
-
+  componentWillReceiveProps(nextProps: any) {
+    if (JSON.stringify(nextProps.data) != JSON.stringify(this.props.data)) {
+      let list = this.filterPermission(nextProps.data, this.state.permissionList);
+      this.setState({
+        buttonList: list,
+      });
+    }
+  }
   getPermission = () => {
     fetch('/system/getButtonPermission', {
       method: 'post',
-      credentials: "include",
+      credentials: 'include',
     })
       .then((res: any) => res.json())
       .then((res: any) => {
         let list = this.filterPermission(this.props.data, res.data);
+        // @ts-ignore
+        this.state.permissionList = res.data;
         this.setState({
           buttonList: list,
         });
       });
   };
 
-  filterPermission = (buttonOptList: any=[], permission: any = {}) => {
+  filterPermission = (buttonOptList: any = [], permission: any = {}) => {
     return buttonOptList.filter((opt: any) => {
       if (opt.children && opt.children.length > 0) {
         const filterChidrenList = this.filterPermission(opt.children);
@@ -169,7 +179,7 @@ class ButtonGroup extends React.Component<any, any> {
       <Menu>
         {dropdownBtnOptList.map((opt: any, index: number) => {
           if (opt.children && opt.children.length > 0) {
-            renderSubMenu(opt);
+            return renderSubMenu(opt);
           }
           return (
             <Menu.Item key={index} disabled={opt.disabled}>
